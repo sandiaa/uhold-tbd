@@ -1,0 +1,19 @@
+/* SmallButton.css */
+
+.small-button {
+    padding: 5px 10px;
+    font-size: 14px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 150px;
+    height: 40px;
+  }
+  
+  .small-button:hover {
+    background-color: #0056b3;
+  }
+  
