@@ -27,48 +27,6 @@
           "who": "author",
           "of": "rootFolder",
           "can": "write"
-        }
-      ],
-      "subFolder": {
-        "$actions": [
-          {
-            "who": "author",
-            "of": "rootFolder",
-            "can": "write"
-          },
-          {
-            "who": "author",
-            "of": "rootFolder",
-            "can": "read"
-          }
-        ]
-      },
-      "folderFiles": {
-        "$actions": [
-          {
-            "who": "author",
-            "of": "rootFolder",
-            "can": "read"
-          },
-          {
-            "who": "author",
-            "of": "rootFolder",
-            "can": "write"
-          }
-        ]
-      }
-    },
-    "subFolder": {
-      "$actions": [
-        {
-          "who": "author",
-          "of": "rootFolder",
-          "can": "read"
-        },
-        {
-          "who": "author",
-          "of": "rootFolder",
-          "can": "write"
         },
         {
           "who": "author",
@@ -92,16 +50,6 @@
             "who": "author",
             "of": "rootFolder",
             "can": "write"
-          },
-          {
-            "who": "author",
-            "of": "subFolder",
-            "can": "read"
-          },
-          {
-            "who": "author",
-            "of": "subFolder",
-            "can": "write"
           }
         ]
       },
@@ -116,43 +64,84 @@
             "who": "author",
             "of": "rootFolder",
             "can": "write"
-          },
-          {
-            "who": "author",
-            "of": "subFolder",
-            "can": "read"
-          },
-          {
-            "who": "author",
-            "of": "subFolder",
-            "can": "write"
           }
-        ]
-      }
-    },
-    "folderFiles": {
-      "$actions": [
-        {
-          "who": "author",
-          "of": "rootFolder",
-          "can": "read"
+        ],
+        "subFolder": {
+          "$actions": [
+            {
+              "who": "author",
+              "of": "rootFolder",
+              "can": "read"
+            },
+            {
+              "who": "author",
+              "of": "rootFolder",
+              "can": "write"
+            },
+            {
+              "who": "author",
+              "of": "subFolder",
+              "can": "read"
+            },
+            {
+              "who": "author",
+              "of": "subFolder",
+              "can": "write"
+            }
+          ],
+          "subFolder": {
+            "$actions": [
+              {
+                "who": "author",
+                "of": "rootFolder",
+                "can": "read"
+              },
+              {
+                "who": "author",
+                "of": "rootFolder",
+                "can": "write"
+              },
+              {
+                "who": "author",
+                "of": "subFolder",
+                "can": "read"
+              },
+              {
+                "who": "author",
+                "of": "subFolder",
+                "can": "write"
+              }
+            ], "folderFiles": {
+              "$actions": [
+                {
+                  "who": "author",
+                  "of": "rootFolder",
+                  "can": "read"
+                },
+                {
+                  "who": "author",
+                  "of": "rootFolder",
+                  "can": "write"
+                }
+              ]
+            }
+          }
         },
-        {
-          "who": "author",
-          "of": "rootFolder",
-          "can": "write"
-        },
-        {
-          "who": "author",
-          "of": "subFolder",
-          "can": "read"
-        },
-        {
-          "who": "author",
-          "of": "subFolder",
-          "can": "write"
+        "folderFiles": {
+          "$actions": [
+            {
+              "who": "author",
+              "of": "rootFolder",
+              "can": "read"
+            },
+            {
+              "who": "author",
+              "of": "rootFolder",
+              "can": "write"
+            }
+          ]
         }
-      ]
+      }
     }
   }
 }

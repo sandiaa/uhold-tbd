@@ -30,7 +30,7 @@ export const createFiles = async (file, rootRecord,isSubFolder) => {
           contextId: rootRecord.contextId,
           parentId: rootRecord.recordId,
           protocol: rootProtocol.protocol,
-          protocolPath: isSubFolder == true ? 'subFolder/folderFiles':'rootFolder/folderFiles',
+          protocolPath:  isSubFolder == true ? 'rootFolder/subFolder/folderFiles':'rootFolder/folderFiles',
           schema: rootProtocol.types.folderFiles.schema,
           dataFormat: rootProtocol.types.folderFiles.dataFormats[0],
         },

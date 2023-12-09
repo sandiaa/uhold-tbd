@@ -6,6 +6,7 @@ export const createRootFolder = async () => {
   const web5Data = await connectToWeb5()
   if (web5Data) {
     const { web5Instance, didString } = web5Data
+    console.log(didString)
     const { records } = await web5Instance.dwn.records.query({
       message: {
         filter: {

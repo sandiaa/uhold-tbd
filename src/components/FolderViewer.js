@@ -7,6 +7,7 @@ import FileListContainer from './FileListContainer'
 import { fetchArecord } from '../helper/fetchArecord'
 const FolderViewer = () => {
   const { id } = useParams()
+  const [recordId, setRecordId] = useState(id)
   const [rootRecord, setRootRecord] = useState({})
   const [rootFiles, setRootFiles] = useState([])
   const [isPageUpdateNeeded, setIsPageUpdateNeeded] = useState(false)
@@ -20,12 +21,12 @@ const FolderViewer = () => {
       const fetchRecord = await fetchArecord(id)
       setRootRecord({
         recordId: fetchRecord[0]._recordId,
-        contextId: fetchRecord[0].parentId,
+        contextId: fetchRecord[0]._contextId,
       })
     }
 
     fetchRecordIds()
-  }, [isPageUpdateNeeded])
+  }, [id,isPageUpdateNeeded])
 
   useEffect(() => {
     const fetchAndSetRootFiles = async () => {
@@ -38,6 +39,7 @@ const FolderViewer = () => {
     }
     fetchAndSetRootFiles()
   }, [rootRecord, isPageUpdateNeeded])
+
 
   return (
     <div className="mainContainer">
