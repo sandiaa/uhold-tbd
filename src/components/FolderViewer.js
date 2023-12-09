@@ -19,9 +19,11 @@ const FolderViewer = () => {
         setLoading(true)
 
       const fetchRecord = await fetchArecord(id)
+      const folderName = await fetchRecord[0].data.json()
       setRootRecord({
         recordId: fetchRecord[0]._recordId,
         contextId: fetchRecord[0]._contextId,
+        folderName: folderName.fileName
       })
     }
 
@@ -50,7 +52,7 @@ const FolderViewer = () => {
             rootId={rootRecord}
             isSubFolder={true}
           />
-          <h3 className="yourFileHeading">Folder: {id}</h3>
+          <h3 className="yourFileHeading">Folder: {rootRecord.folderName}</h3>
           <div className="fileContainer">
             <FileListContainer list={rootFiles} />
           </div>

@@ -9,6 +9,7 @@
   cursor: pointer;
   margin: 10px;
   overflow: hidden;
+  position: relative;
 }
 
 .fileImage {
@@ -33,4 +34,14 @@
   color: #666;
   margin-top: 5px; /* Adjust spacing between name and createdAt */
   font-size: 0.8em;
+}
+.fileItemContainer {
+  position: relative;
+}
+
+.fileActionContainer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1; /* Ensures the file actions appear above other content */
 }

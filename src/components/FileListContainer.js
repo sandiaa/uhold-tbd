@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import '../styles/fileList.css' // CSS file for styling
 import FileItem from './FileItem'
+import FileActionComponent from './FileActionComponent'
 
 const FileListContainer = ({ list} ) => {
   const [filesList, setFilesList] = useState([])
@@ -41,10 +42,12 @@ const FileListContainer = ({ list} ) => {
       {columns.map((column, columnIndex) => (
         <div key={columnIndex} className="fileColumn">
           {column.map((element) => (
+            <div>
             <FileItem
               key={element.recordId}
               file={element}
             />
+            </div>
           ))}
         </div>
       ))}
