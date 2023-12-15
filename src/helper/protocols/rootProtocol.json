@@ -46,6 +46,15 @@
           "who": "recipient",
           "of": "rootFolder",
           "can": "write"
+        },{
+          "who": "recipient",
+          "of": "subFolder",
+          "can": "read"
+        },
+        {
+          "who": "recipient",
+          "of": "subFolder",
+          "can": "write"
         }
       ],
       "folderFiles": {
@@ -58,6 +67,34 @@
           {
             "who": "author",
             "of": "rootFolder",
+            "can": "write"
+          },
+          {
+            "who": "author",
+            "of": "subFolder",
+            "can": "read"
+          },
+          {
+            "who": "author",
+            "of": "subFolder",
+            "can": "write"
+          }, {
+            "who": "recipient",
+            "of": "rootFolder",
+            "can": "read"
+          },
+          {
+            "who": "recipient",
+            "of": "rootFolder",
+            "can": "write"
+          },{
+            "who": "recipient",
+            "of": "subFolder",
+            "can": "read"
+          },
+          {
+            "who": "recipient",
+            "of": "subFolder",
             "can": "write"
           }
         ]
@@ -75,6 +112,24 @@
             "can": "write"
           },
           {
+            "who": "author",
+            "of": "subFolder",
+            "can": "read"
+          },
+          {
+            "who": "author",
+            "of": "subFolder",
+            "can": "write"
+          }, {
+            "who": "recipient",
+            "of": "rootFolder",
+            "can": "read"
+          },
+          {
+            "who": "recipient",
+            "of": "rootFolder",
+            "can": "write"
+          },{
             "who": "recipient",
             "of": "subFolder",
             "can": "read"
@@ -106,8 +161,16 @@
               "who": "author",
               "of": "subFolder",
               "can": "write"
-            }, 
+            }, {
+              "who": "recipient",
+              "of": "rootFolder",
+              "can": "read"
+            },
             {
+              "who": "recipient",
+              "of": "rootFolder",
+              "can": "write"
+            },{
               "who": "recipient",
               "of": "subFolder",
               "can": "read"
@@ -141,6 +204,15 @@
                 "can": "write"
               }, {
                 "who": "recipient",
+                "of": "rootFolder",
+                "can": "read"
+              },
+              {
+                "who": "recipient",
+                "of": "rootFolder",
+                "can": "write"
+              },{
+                "who": "recipient",
                 "of": "subFolder",
                 "can": "read"
               },
@@ -160,6 +232,34 @@
                   "who": "author",
                   "of": "rootFolder",
                   "can": "write"
+                },
+                {
+                  "who": "author",
+                  "of": "subFolder",
+                  "can": "read"
+                },
+                {
+                  "who": "author",
+                  "of": "subFolder",
+                  "can": "write"
+                }, {
+                  "who": "recipient",
+                  "of": "rootFolder",
+                  "can": "read"
+                },
+                {
+                  "who": "recipient",
+                  "of": "rootFolder",
+                  "can": "write"
+                },{
+                  "who": "recipient",
+                  "of": "subFolder",
+                  "can": "read"
+                },
+                {
+                  "who": "recipient",
+                  "of": "subFolder",
+                  "can": "write"
                 }
               ]
             }
@@ -175,6 +275,34 @@
             {
               "who": "author",
               "of": "rootFolder",
+              "can": "write"
+            },
+            {
+              "who": "author",
+              "of": "subFolder",
+              "can": "read"
+            },
+            {
+              "who": "author",
+              "of": "subFolder",
+              "can": "write"
+            }, {
+              "who": "recipient",
+              "of": "rootFolder",
+              "can": "read"
+            },
+            {
+              "who": "recipient",
+              "of": "rootFolder",
+              "can": "write"
+            },{
+              "who": "recipient",
+              "of": "subFolder",
+              "can": "read"
+            },
+            {
+              "who": "recipient",
+              "of": "subFolder",
               "can": "write"
             }
           ]

@@ -8,9 +8,11 @@ import { fetchRootFiles } from '../helper/fetchFiles'
 import { createRootFolder } from '../helper/createRootFolder'
 import { createFiles } from '../helper/createFiles'
 import UtilityComponent from './UtilityComponent'
+import { fetchBrandFiles } from '../helper/fetchBrandFiles'
 
 const Landing = () => {
   const [rootFiles, setRootFiles] = useState([])
+  const [brandFiles, setBrandFiles] = useState([])
   const [rootId, setRootId] = useState({})
   const [isPageUpdateNeeded, setIsPageUpdateNeeded] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -31,18 +33,24 @@ const Landing = () => {
         setLoading(true)
         const fetchRootFilesList = await fetchRootFiles(rootId.recordId)
         setRootFiles(fetchRootFilesList)
+        const brandRecords = await fetchBrandFiles()
+        setBrandFiles(brandRecords)
         setLoading(false)
         setIsPageUpdateNeeded(false)
       }
     }
 
     fetchAndSetRootFiles()
-  }, [rootId,isPageUpdateNeeded])
+  }, [rootId, isPageUpdateNeeded])
 
 
   return (
     <div className="mainContainer">
-      <UtilityComponent onUpdate={() => setIsPageUpdateNeeded(true)} rootId={rootId} isSubFolder={false}/>
+      <UtilityComponent
+        onUpdate={() => setIsPageUpdateNeeded(true)}
+        rootId={rootId}
+        isSubFolder={false}
+      />
       <h3 className="yourFileHeading">Your files</h3>
       <div className="fileContainer">
         {loading == false ? <FileListContainer list={rootFiles} /> : null}
@@ -53,7 +61,7 @@ const Landing = () => {
       </div>
       <h3 className="yourFileHeading">Associated Brand files</h3>
       <div className="fileContainer">
-        <FileListContainer list={files} />
+      {loading == false ? <FileListContainer list={brandFiles} /> : null}
       </div>
     </div>
   )

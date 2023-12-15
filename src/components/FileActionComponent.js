@@ -1,19 +1,18 @@
-
-
 import React, { useState, useEffect } from 'react'
 import '../styles/fileActionComponent.css'
 import share from '../assets/share.png'
 import deleteIcon from '../assets/delete.png'
+import { createShared } from '../helper/createShared'
 
-const FileActionComponent = ({file}) => {
-
-    const shareMe = () => {
-console.log("shareme")
-console.log(file)
-    }
-    const deleteMe = () => {
-        console.log("deleteme")
-    }
+const FileActionComponent = ({ file }) => {
+  const shareMe = () => {
+    console.log('shareme', file.recordId)
+    createShared(file.recordId)
+    
+  }
+  const deleteMe = () => {
+    console.log('deleteme')
+  }
   return (
     <div>
       <div className="fileItemActions">

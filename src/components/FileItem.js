@@ -7,19 +7,8 @@ import fileImage from '../assets/file.png'
 import FileViewer from './FileViewer'
 import { useHistory } from 'react-router-dom'
 import FileActionComponent from './FileActionComponent'
-const displayFile = (file) => {
-  if (file.fileStore) {
-    const binaryString = atob(file.fileStore)
-    const byteArray = new Uint8Array(binaryString.length)
-    for (let i = 0; i < binaryString.length; i++) {
-      byteArray[i] = binaryString.charCodeAt(i)
-    }
-    const blob = new Blob([byteArray], { type: file.fileType })
-    return blob
-  } else {
-    return null
-  }
-}
+import brand from '../assets/brand.png'
+import {displayFile} from '../helper/convertBlobToFile'
 
 const FileItem = ({ file }) => {
   const [fileToDisplay, setFileToDisplay] = useState(null)
@@ -29,21 +18,29 @@ const FileItem = ({ file }) => {
   const handleClick = () => {
     if (file.fileType == 'folder') {
       history.push(`/folderView/${file.recordId}`)
+    } else if (file.fileType == 'brand') {
+      history.push(`/brandFilesView/${file.recordId}`)
     } else {
-      const fileBlob = displayFile(file)
+      const fileBlob = displayFile(file.fileStore, file.fileType)
       setFileToDisplay(fileBlob)
       setIsModalOpen(true)
     }
   }
 
   return (
-<div className="fileItemContainer">
-<div className="fileActionContainer">
-      <FileActionComponent file={file}/>
+    <div className="fileItemContainer">
+      <div className="fileActionContainer">
+        <FileActionComponent file={file} />
       </div>
       <div className="fileItem" onClick={handleClick}>
         <img
-          src={file.fileType === 'folder' ? folder : fileImage}
+          src={
+            file.fileType === 'folder'
+              ? folder
+              : file.fileType === 'brand'
+              ? brand
+              : fileImage
+          }
           alt="folder"
           className="fileImage"
         />
@@ -51,7 +48,7 @@ const FileItem = ({ file }) => {
           <h5 className="fileName">{file.fileName}</h5>
           <p className="fileCreatedAt">{file.createdAt}</p>
         </div>
-        </div>
+      </div>
       <div>
         {isModalOpen && fileToDisplay != null && (
           <FileViewer

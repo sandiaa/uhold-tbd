@@ -56,4 +56,9 @@ body {
     border-radius: 5px;
     font-size: 16px;
   }
+  .userErrorMessage {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+  }
   

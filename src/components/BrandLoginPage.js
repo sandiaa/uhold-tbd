@@ -5,11 +5,12 @@ import { useHistory, useParams } from 'react-router-dom'
 import verifyUser from '../web5/verifyUser'
 import { configureBrandProtocol } from '../helper/protocols/configureBrandProtocol'
 
-const UserInput = () => {
+const BrandLoginPage = () => {
   const [userPassword, setUserPassword] = useState('')
   const [showError, setShowError] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
-  const { optionalBrandProtocol } = useParams();
+  const { protocolLink } = useParams();
+  console.log(protocolLink)
 
   const handleuserPasswordChange = (event) => {
     setUserPassword(event.target.value)
@@ -17,7 +18,7 @@ const UserInput = () => {
   const history = useHistory()
   const buttonOnclick = async () => {
     if (await verifyUser(userPassword)) {
-      if (await configureBrandProtocol(optionalBrandProtocol)) {
+      if (await configureBrandProtocol(protocolLink)) {
       console.log("iam configured")
           history.push('/landing')}
       else {
@@ -74,4 +75,4 @@ const UserInput = () => {
   )
 }
 
-export default UserInput
+export default BrandLoginPage
