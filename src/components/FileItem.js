@@ -8,9 +8,9 @@ import FileViewer from './FileViewer'
 import { useHistory } from 'react-router-dom'
 import FileActionComponent from './FileActionComponent'
 import brand from '../assets/brand.png'
-import {displayFile} from '../helper/convertBlobToFile'
+import { displayFile } from '../helper/convertBlobToFile'
 
-const FileItem = ({ file }) => {
+const FileItem = ({ file, onDelete,onRetrieve }) => {
   const [fileToDisplay, setFileToDisplay] = useState(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const history = useHistory()
@@ -26,38 +26,43 @@ const FileItem = ({ file }) => {
       setIsModalOpen(true)
     }
   }
+  const fileOnDelete = () => {
+    onDelete()
+  }
 
   return (
-    <div className="fileItemContainer">
-      <div className="fileActionContainer">
-        <FileActionComponent file={file} />
-      </div>
-      <div className="fileItem" onClick={handleClick}>
-        <img
-          src={
-            file.fileType === 'folder'
-              ? folder
-              : file.fileType === 'brand'
-              ? brand
-              : fileImage
-          }
-          alt="folder"
-          className="fileImage"
-        />
-        <div className="fileDetails">
-          <h5 className="fileName">{file.fileName}</h5>
-          <p className="fileCreatedAt">{file.createdAt}</p>
+    <div>
+        <div className="fileItemContainer">
+          <div className="fileActionContainer">
+            <FileActionComponent file={file} fileOnDelete={fileOnDelete} fileOnRetrieve={onRetrieve}/>
+          </div>
+          <div className="fileItem" onClick={handleClick}>
+            <img
+              src={
+                file.fileType === 'folder'
+                  ? folder
+                  : file.fileType === 'brand'
+                  ? brand
+                  : fileImage
+              }
+              alt="folder"
+              className="fileImage"
+            />
+            <div className="fileDetails">
+              <h5 className="fileName">{file.fileName}</h5>
+              <p className="fileCreatedAt">{file.createdAt}</p>
+            </div>
+          </div>
+          <div>
+            {isModalOpen && fileToDisplay != null && (
+              <FileViewer
+                fileBlob={fileToDisplay}
+                onClose={() => setIsModalOpen(false)}
+                isOpen={isModalOpen}
+              />
+            )}
+          </div>
         </div>
-      </div>
-      <div>
-        {isModalOpen && fileToDisplay != null && (
-          <FileViewer
-            fileBlob={fileToDisplay}
-            onClose={() => setIsModalOpen(false)}
-            isOpen={isModalOpen}
-          />
-        )}
-      </div>
     </div>
   )
 }

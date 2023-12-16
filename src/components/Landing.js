@@ -3,10 +3,8 @@ import SmallButton from './Button'
 import FileListContainer from './FileListContainer'
 import React, { useState, useRef, useEffect, useLayoutEffect } from 'react'
 import CreateFolder from './CreateFolder'
-import { createFolder } from '../helper/createFolder'
 import { fetchRootFiles } from '../helper/fetchFiles'
 import { createRootFolder } from '../helper/createRootFolder'
-import { createFiles } from '../helper/createFiles'
 import UtilityComponent from './UtilityComponent'
 import { fetchBrandFiles } from '../helper/fetchBrandFiles'
 
@@ -16,6 +14,7 @@ const Landing = () => {
   const [rootId, setRootId] = useState({})
   const [isPageUpdateNeeded, setIsPageUpdateNeeded] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [showTrash, setShowTrash] = useState(false)
   const files = []
 
   useEffect(() => {
@@ -42,7 +41,12 @@ const Landing = () => {
 
     fetchAndSetRootFiles()
   }, [rootId, isPageUpdateNeeded])
-
+  const onFileDelete = () => {
+    setIsPageUpdateNeeded(true)
+  }
+  const onFileRetrieve = () => {
+   console.log("ghh")
+  }
 
   return (
     <div className="mainContainer">
@@ -50,18 +54,35 @@ const Landing = () => {
         onUpdate={() => setIsPageUpdateNeeded(true)}
         rootId={rootId}
         isSubFolder={false}
+        showTrashPage={() => setShowTrash(true)}
+        showHome={() => setShowTrash(false)}
+        showTrashValue = {showTrash}
       />
-      <h3 className="yourFileHeading">Your files</h3>
-      <div className="fileContainer">
-        {loading == false ? <FileListContainer list={rootFiles} /> : null}
-      </div>
-      <h3 className="yourFileHeading">Shared files</h3>
-      <div className="fileContainer">
-        <FileListContainer list={files} />
-      </div>
-      <h3 className="yourFileHeading">Associated Brand files</h3>
-      <div className="fileContainer">
-      {loading == false ? <FileListContainer list={brandFiles} /> : null}
+      {!loading && !showTrash ? (
+        <div>
+          <h3 className="yourFileHeading">Your files</h3>
+          <div className="fileContainer">
+            <FileListContainer list={rootFiles} onFileDelete={onFileDelete} onFileRetrieve={onFileRetrieve} />
+          </div>
+          <h3 className="yourFileHeading">Shared files</h3>
+          <div className="fileContainer">
+            <FileListContainer list={files} />
+          </div>
+          <h3 className="yourFileHeading">Associated Brand files</h3>
+          <div className="fileContainer">
+            <FileListContainer list={brandFiles} />
+          </div>
+        </div>
+      ) : null}
+      <div>
+        {showTrash ? (
+          <div>
+            <h3 className="yourFileHeading">Trash Files</h3>
+            <div className="fileContainer">
+              <FileListContainer list={rootFiles} showTrashValue={showTrash}  />
+            </div>
+          </div>
+        ) : null}
       </div>
     </div>
   )

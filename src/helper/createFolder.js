@@ -10,7 +10,10 @@ export const createFolder = async (folderName, rootRecord, isSubFolder) => {
       const folderData = {
         fileName: folderName,
         fileType: 'folder',
-        fileStore: ""
+        fileStore: "",
+        shared: false,
+        starred:false,
+        deleted:false
       }
       const {
         record: folderRecord,

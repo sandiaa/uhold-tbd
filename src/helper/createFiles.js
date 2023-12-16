@@ -19,7 +19,10 @@ export const createFiles = async (file, rootRecord,isSubFolder) => {
       const fileData = {
         fileName: file.name,
         fileType: file.type,
-        fileStore : base64Image
+        fileStore : base64Image,
+        shared: false,
+        starred:false,
+        deleted:false
       }
       const {
         record: fileRecord,
