@@ -6,11 +6,14 @@ import Landing from './components/Landing';
 import FolderViewer from './components/FolderViewer';
 import BrandLoginPage from './components/BrandLoginPage';
 import BrandFilesView from './components/BrandFilesView';
+import MainPage from './components/MainPage';
 function App() {
   return (
     <Router>
     <Switch>
       <Route exact path="/" component={UserInput} />
+      <Route exact path="/landing" component={Landing} />
+      <Route exact path="/mainPage" component={MainPage}/>
       <Route exact path="/brandLogin/:protocolLink" component={BrandLoginPage} />
       <Route exact path="/landing" component={Landing} />
       <Route exact path="/folderView/:id" component={FolderViewer} />

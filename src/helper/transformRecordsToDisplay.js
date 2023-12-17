@@ -1,3 +1,4 @@
+
 export const transformList = async (list) => {
     const dataList = [];
     if (list.length !== 0) {

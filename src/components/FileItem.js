@@ -9,8 +9,8 @@ import { useHistory } from 'react-router-dom'
 import FileActionComponent from './FileActionComponent'
 import brand from '../assets/brand.png'
 import { displayFile } from '../helper/convertBlobToFile'
-
-const FileItem = ({ file, onDelete,onRetrieve }) => {
+import { formatDate } from '../helper/formatDate'
+const FileItem = ({ file, onDelete,onRetrieve,onfileStarred }) => {
   const [fileToDisplay, setFileToDisplay] = useState(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const history = useHistory()
@@ -30,11 +30,18 @@ const FileItem = ({ file, onDelete,onRetrieve }) => {
     onDelete()
   }
 
+  const fileOnRetrieve = () => {
+    onRetrieve(file.recordId)
+  }
+  const fileOnStarred = (isStarred) => {
+  onfileStarred(isStarred, file.recordId)
+  }
+
   return (
     <div>
         <div className="fileItemContainer">
           <div className="fileActionContainer">
-            <FileActionComponent file={file} fileOnDelete={fileOnDelete} fileOnRetrieve={onRetrieve}/>
+            <FileActionComponent file={file} fileOnDelete={fileOnDelete} fileOnRetrieve={fileOnRetrieve} fileStarred={fileOnStarred}/>
           </div>
           <div className="fileItem" onClick={handleClick}>
             <img
@@ -50,7 +57,7 @@ const FileItem = ({ file, onDelete,onRetrieve }) => {
             />
             <div className="fileDetails">
               <h5 className="fileName">{file.fileName}</h5>
-              <p className="fileCreatedAt">{file.createdAt}</p>
+              <p className="fileCreatedAt">{formatDate(file.createdAt)}</p>
             </div>
           </div>
           <div>

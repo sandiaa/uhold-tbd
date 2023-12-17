@@ -1,0 +1,105 @@
+/* chatComponent.css */
+
+/* Parent container */
+.parentContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .chatContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 80%;
+    width: 80%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow-y: auto;
+    padding: 10px; /* Add padding to create space between messages and border */
+  }
+  
+  /* Container for individual messages */
+  .message {
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 15px; /* Adjust margin to create space between messages */
+  }
+  
+  /* Styling for sender's message */
+  .user {
+    justify-content: flex-end;
+  }
+  
+  /* Styling for receiver's message */
+  .other {
+    justify-content: flex-start;
+  }
+  
+  /* Container for message content */
+  .messageContent {
+    background-color: #dcf8c6; /* Sample color for user's messages */
+    padding: 10px;
+    border-radius: 8px;
+    position: relative;
+    max-width: 80%;
+    word-wrap: break-word;
+  }
+  
+  /* Styling for sender's image */
+  .senderPic {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-left: 5px;
+  }
+  
+  /* Styling for receiver's image */
+  .receiverPic {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 5px;
+  }
+  
+  /* Styling for message text */
+  .messageText {
+    color: #000;
+    font-size: 14px;
+  }
+  
+  /* Input container for sending messages */
+  .inputContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #f7f7f7;
+  }
+  .chatMessages {
+    flex: 1;
+    overflow-y: auto; /* Enable vertical scrolling */
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+  /* Input field for typing messages */
+  .messageInput {
+    flex: 1;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  /* Send button */
+  .sendButton {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4caf50;
+    color: white;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+  

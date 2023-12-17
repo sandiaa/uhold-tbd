@@ -7,7 +7,7 @@ import starSelected from '../assets/starSelected.png'
 import starUnselected from '../assets/starUnselected.png'
 import { fetchArecord } from '../helper/fetchArecord'
 import undoDelete from '../assets/undoDelete.png'
-const FileActionComponent = ({ file, fileOnDelete,fileOnRetrieve }) => {
+const FileActionComponent = ({ file, fileOnDelete,fileOnRetrieve, fileStarred }) => {
   const [isStarred, setIsStarred] = useState('')
   const [loading, setIsLoading] = useState(false)
 
@@ -33,6 +33,18 @@ const FileActionComponent = ({ file, fileOnDelete,fileOnRetrieve }) => {
     const response = await record[0].update({ data: recData })
     if (response.status.code == 202) {
       setIsStarred(recData.starred)
+      fileStarred(recData.starred)
+    }
+  }
+  const retrieveMe = async () => {
+    setIsLoading(true)
+    const record = await fetchArecord(file.recordId)
+    const recData = await record[0].data.json()
+    recData.deleted = false
+    const response = await record[0].update({ data: recData })
+    if (response.status.code=202) {
+      fileOnRetrieve()
+      setIsLoading(false)
     }
   }
   useEffect(() => {
@@ -42,7 +54,7 @@ const FileActionComponent = ({ file, fileOnDelete,fileOnRetrieve }) => {
 
   return (
     <div className="fileItemActions">
-      {loading && !file.deleted ? (
+      {!loading && !file.deleted ? (
         <div>
           <button className="fileActionButton" onClick={StarMe}>
             <img
@@ -62,7 +74,7 @@ const FileActionComponent = ({ file, fileOnDelete,fileOnRetrieve }) => {
 
       {file.deleted ? (
         <div>
-          <button className="fileActionButton" onClick={fileOnRetrieve}>
+          <button className="fileActionButton" onClick={retrieveMe}>
             <img src={undoDelete} alt="UndoDelete" className="fileImage" />
           </button>
         </div>

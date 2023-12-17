@@ -19,7 +19,7 @@ const UserInput = () => {
     if (await verifyUser(userPassword)) {
       if (await configureBrandProtocol(optionalBrandProtocol)) {
       console.log("iam configured")
-          history.push('/landing')}
+          history.push('/mainPage')}
       else {
         setErrorMessage('Not on you, on us as :( Brand cannot be configured')
         setShowError(true)
@@ -44,11 +44,11 @@ const UserInput = () => {
           <h1 className="title">UHOLD</h1>
 
           <div className="input-wrapper">
-            {' '}
+            
             <h3>
               Hey! you are one step away to access your vault. Your secret
               phrase please. I wouldn't disclose. Trust me.
-            </h3>{' '}
+            </h3>
           </div>
           <div className="input-wrapper">
             <label htmlFor="password">Password:</label>

@@ -44,9 +44,6 @@ const Landing = () => {
   const onFileDelete = () => {
     setIsPageUpdateNeeded(true)
   }
-  const onFileRetrieve = () => {
-   console.log("ghh")
-  }
 
   return (
     <div className="mainContainer">
@@ -55,20 +52,20 @@ const Landing = () => {
         rootId={rootId}
         isSubFolder={false}
         showTrashPage={() => setShowTrash(true)}
-        showHome={() => setShowTrash(false)}
+        showHome={() =>{ setShowTrash(false); setIsPageUpdateNeeded(true)}}
         showTrashValue = {showTrash}
       />
       {!loading && !showTrash ? (
         <div>
-          <h3 className="yourFileHeading">Your files</h3>
+          <h3 className="fileHeading">Your files</h3>
           <div className="fileContainer">
-            <FileListContainer list={rootFiles} onFileDelete={onFileDelete} onFileRetrieve={onFileRetrieve} />
+            <FileListContainer list={rootFiles} onFileDelete={onFileDelete}  />
           </div>
-          <h3 className="yourFileHeading">Shared files</h3>
+          <h3 className="fileHeading">Shared files</h3>
           <div className="fileContainer">
             <FileListContainer list={files} />
           </div>
-          <h3 className="yourFileHeading">Associated Brand files</h3>
+          <h3 className="fileHeading">Associated Brand files</h3>
           <div className="fileContainer">
             <FileListContainer list={brandFiles} />
           </div>
@@ -77,7 +74,7 @@ const Landing = () => {
       <div>
         {showTrash ? (
           <div>
-            <h3 className="yourFileHeading">Trash Files</h3>
+            <h3 className="fileHeading">Trash Files</h3>
             <div className="fileContainer">
               <FileListContainer list={rootFiles} showTrashValue={showTrash}  />
             </div>

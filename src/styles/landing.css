@@ -1,11 +1,10 @@
 .mainContainer {
   width: 80%;
-  height: 80%;
+  height: 100%;
   display: flex;
   margin: 50px auto 0;
   min-height: 300px;
   max-height: 1500px; /* Set a minimum height */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Box shadow effect */
   flex-direction: column;
   margin-bottom: 100px;
 }
@@ -21,18 +20,21 @@
   margin-right: 10px; /* Adjust margin between buttons */
 }
 
+/* Assuming these are in your CSS file */
+
+/* Assuming these are in your CSS file */
+
 .fileContainer {
   width: 80%;
-  height: 80%;
+  max-height: 300px; /* Set a maximum height */
   display: flex;
   margin: 20px auto 0;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Box shadow effect */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   flex-direction: column;
-  overflow: hidden; /* Hide overflow content */
-  max-height: 300px;
+  overflow-y: auto; /* Enable vertical scrolling */
   margin-bottom: 50px;
 }
-.yourFileHeading {
-    margin-left: 130px;
-}
 
+.fileHeading {
+  margin-left: 130px;
+}

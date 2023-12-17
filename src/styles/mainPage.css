@@ -1,0 +1,21 @@
+/* mainPage.css */
+
+/* Assuming you have a container class for the main layout */
+.mainPageContainer {
+    display: flex;
+    height: 100vh;  }
+  
+  /* Set 70% width for landingComponent */
+  .landingComponent {
+    flex: 7; /* Take 70% of available space */
+    height: 100vh; /* Adjust the height as needed */
+    overflow-y: auto; /* Enable vertical scrolling */
+    width: 70%;
+  }
+  .chat {
+    flex: 3; /* Take 30% of available space */
+    height: 98vh; /* Set height to full viewport height */
+    overflow: hidden; /* Hide overflow content */
+    padding: 20px; /* Add padding around the chat component */
+    box-sizing: border-box; /* Include padding in the total width and height */
+  }
