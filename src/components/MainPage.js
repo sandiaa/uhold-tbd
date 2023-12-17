@@ -3,7 +3,7 @@ import '../styles/mainPage.css';
 import Landing from './Landing';
 import ChatComponent from './ChatComponent';
 import ContactComponent from './ContactComponent';
-
+import MessagesHome from './MessagesHome';
 const MainPage = () => {
  
         const contacts = [
@@ -30,8 +30,7 @@ const MainPage = () => {
         <Landing />
       </div>
       <div className="chat">
-      <ContactComponent contacts={contacts} />
-      </div>
+<ContactComponent contacts={contacts}/>      </div>
     </div>
   );
 };

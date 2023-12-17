@@ -1,0 +1,44 @@
+/* ChatList.css */
+
+/* ... (previous styles) */
+
+/* Style for contact item */
+.messageItem {
+  display: flex;
+  align-items: center;
+  padding:0 20px;
+  cursor: pointer;
+}
+
+/* Style for contact image */
+.messageImage {
+  width: 50px; /* Adjust image size */
+  height: 50px;
+  border-radius: 50%; /* Make it circular */
+  margin-right: 15px; /* Adjust margin as needed */
+}
+
+/* Style for contact information */
+.messageInfo {
+  display: flex;
+  flex: 1; /* Allow flex-grow for contact information */
+  justify-content: space-between; /* Space between name and unread count */
+  align-items: center; /* Align items in the center */
+}
+
+/* Style for contact name */
+.messageName {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+/* Style for unread message count */
+.unreadCount {
+  background-color: #ff5733; /* Sample color for unread count */
+  color: white;
+  border-radius: 50%;
+  padding: 5px;
+  width: 20px;
+  text-align: center;
+  font-size: 12px;
+}
