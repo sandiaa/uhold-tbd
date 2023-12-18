@@ -30,7 +30,8 @@ const MainPage = () => {
         <Landing />
       </div>
       <div className="chat">
-<ContactComponent contacts={contacts}/>      </div>
+        <MessagesHome/>
+     </div>
     </div>
   );
 };

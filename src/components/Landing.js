@@ -7,7 +7,7 @@ import { fetchRootFiles } from '../helper/fetchFiles'
 import { createRootFolder } from '../helper/createRootFolder'
 import UtilityComponent from './UtilityComponent'
 import { fetchBrandFiles } from '../helper/fetchBrandFiles'
-
+import { createRootFiles } from '../helper/createRootFiles'
 const Landing = () => {
   const [rootFiles, setRootFiles] = useState([])
   const [brandFiles, setBrandFiles] = useState([])
@@ -21,6 +21,7 @@ const Landing = () => {
     const setRootData = async () => {
       const fetchRootId = await createRootFolder()
       setRootId(fetchRootId)
+      const setRootFiles = await createRootFiles()
     }
 
     setRootData()

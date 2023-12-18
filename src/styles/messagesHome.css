@@ -8,6 +8,9 @@
   align-items: center;
   padding:0 20px;
   cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.05);  
+  margin: 10px;
+  border-radius: 5px;
 }
 
 /* Style for contact image */
@@ -25,11 +28,12 @@
   justify-content: space-between; /* Space between name and unread count */
   align-items: center; /* Align items in the center */
 }
-
-/* Style for contact name */
 .messageName {
-  font-weight: bold;
   margin-bottom: 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 150px; /* Adjust the width as needed */
 }
 
 /* Style for unread message count */
@@ -41,4 +45,10 @@
   width: 20px;
   text-align: center;
   font-size: 12px;
+}
+/* Your existing styles */
+.chatListHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
