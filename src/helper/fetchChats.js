@@ -14,7 +14,9 @@ const { record } = await web5Instance.dwn.records.write({
     protocol: "https://didcomm.org/uhold/uholdChat",
     protocolPath: 'message',
     schema: "https://didcomm.org/uhold/schemas/chat",
-    dataFormat : "application/json"
+    dataFormat : "application/json",
+    recipient: recDid
+
   },
 })
 const { status: ss } = await record.send(recDid)

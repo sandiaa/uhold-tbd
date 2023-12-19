@@ -13,22 +13,22 @@ const AddContact = ({ handleCloseModal, handleSaveContact, newContact, setNewCon
         </span>
         <h3>Add New Contact</h3>
         <div>
-          <label>Name:</label>
+          <label>Name</label>
           <input
             type="text"
-            value={newContact.name}
+            value={newContact.contactName}
             onChange={(e) =>
-              setNewContact({ ...newContact, name: e.target.value })
+              setNewContact({ ...newContact, contactName: e.target.value })
             }
           />
         </div>
         <div>
-          <label>ID:</label>
+          <label>DID</label>
           <input
             type="text"
-            value={newContact.id}
+            value={newContact.contactDid}
             onChange={(e) =>
-              setNewContact({ ...newContact, id: e.target.value })
+              setNewContact({ ...newContact, contactDid: e.target.value })
             }
           />
         </div>

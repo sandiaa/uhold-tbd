@@ -1,29 +1,29 @@
 /* contactComponent.css */
-
 /* Style for the modal container */
 .contactModal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    justify-content: center;
-    align-items: center;
-    z-index: 1;
-  }
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 90vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
  /* contactComponent.css */
 
  .parentContainerContact {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start; /* Align items to the top */
     height: 100%;
     overflow-y: auto; /* Enable vertical scrolling if needed */
     padding: 20px; /* Add padding around the parent container */
     gap: 20px; /* Add spacing between child elements */
+    align-items: center;
+    height: 90vh;
   }
   
   /* ... (other styles) */
@@ -32,19 +32,18 @@
     display: flex;
   }
   
-  /* Style for the contact list container */
   .contactListContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 300px; /* Adjust the width as needed */
+    width: 100%; /* Adjust the width to span the entire width */
+    max-width: 300px; /* Set a maximum width to limit the container */
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 8px;
     background-color: #fff;
+    margin: 0 auto; /* Center the container horizontally */
   }
-  
-  /* Style for the contact list */
   .contactList {
     list-style: none;
     padding: 0;
@@ -54,12 +53,23 @@
   
   /* Style for each contact item */
   .contactItem {
+    display: flex;
+    justify-content: space-between;
     padding: 8px;
     margin: 5px;
     cursor: pointer;
     border-radius: 4px;
     background-color: #f0f0f0;
     transition: background-color 0.3s ease;
+  }
+  
+  .messageButton {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    background-color: #4caf50;
+    color: white;
+    cursor: pointer;
   }
   
   .contactItem:hover {
@@ -90,10 +100,9 @@
     background-color: white;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     z-index: 1000;
-    width: 290px;
+    width: 390px;
     height: 100px;
   }
-  
   /* Show modal when selectedContact exists */
   .contactDetails.active {
     display: block;
@@ -112,6 +121,8 @@
     transform: translateX(-50%);
   }
 
+/* ... other styles */
+
 .addContactButton {
   padding: 8px 12px;
   border: none;
@@ -120,4 +131,28 @@
   color: white;
   cursor: pointer;
   margin-left: 10px;
+}
+.contactDid {
+  max-width: 80%; /* Adjust as needed */
+  /* Enable text truncation and add an ellipsis for overflow */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.flexContainer {
+  display: flex;
+  align-items: center;
+}
+
+h3 {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+h3 p {
+  margin-right: 10px;
+  cursor: pointer;
+  font-size: smaller;
+  text-decoration: underline;
 }

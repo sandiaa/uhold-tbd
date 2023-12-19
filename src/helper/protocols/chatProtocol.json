@@ -13,7 +13,7 @@
           { "who": "anyone", "can": "write" },
           { "who": "author", "of": "message", "can": "read" },
           { "who": "recipient", "of": "message", "can": "read" },
-          { "who": "recipient", "of": "message", "can": "update" }
+          { "who": "recipient", "of": "message", "can": "write" }
 
         ]
       }

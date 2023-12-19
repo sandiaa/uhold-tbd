@@ -17,7 +17,7 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     overflow-y: auto;
-    padding: 10px; /* Add padding to create space between messages and border */
+    word-wrap: break-word; 
   }
   
   /* Container for individual messages */
@@ -39,12 +39,9 @@
   
   /* Container for message content */
   .messageContent {
-    background-color: #dcf8c6; /* Sample color for user's messages */
-    padding: 10px;
     border-radius: 8px;
     position: relative;
     max-width: 80%;
-    word-wrap: break-word;
   }
   
   /* Styling for sender's image */
@@ -115,3 +112,44 @@
     white-space: nowrap;
     margin-left: 10px; /* Adjust margin as needed */
   }
+  /* CSS */
+/* Style for sender's message */
+.sent {
+  display: flex;
+  justify-content: flex-end; /* Align sender's message content to the right */
+  align-items: center;
+}
+
+.sent .messageText {
+  background-color: #DCF8C6; /* Background color for sender's message */
+  border-radius: 10px 10px 0 10px; /* Rounded corners for sender's message */
+  padding: 10px;
+  word-wrap: break-word; 
+  max-width: 80%;
+}
+
+.sent .senderPic {
+  margin-left: 5px; /* Adjust margin for sender's image */
+}
+
+/* Style for receiver's message */
+.received {
+  display: flex;
+  justify-content: flex-start; /* Align receiver's message content to the left */
+  align-items: center;
+}
+
+.received .messageText {
+  border-radius: 10px 10px 10px 0; /* Rounded corners for receiver's message */
+  padding: 10px;
+  background-color: #DCF8C6; /* Background color for sender's message */
+  word-wrap: break-word; 
+  max-width: 80%;
+}
+
+.received .receiverPic {
+  margin-right: 5px; /* Adjust margin for receiver's image */
+}
+
+/* Rest of your CSS */
+/* ... */

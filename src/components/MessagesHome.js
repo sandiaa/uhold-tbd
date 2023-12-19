@@ -1,37 +1,47 @@
-import React, { useEffect, useState } from 'react'
-import '../styles/messagesHome.css'
-import folder from '../assets/folder.png'
-import { fetchChats } from '../helper/fetchChats'
-import ChatComponent from './ChatComponent'
-import ContactComponent from './ContactComponent'
+import React, { useEffect, useState } from 'react';
+import '../styles/messagesHome.css';
+import folder from '../assets/folder.png';
+import { fetchChats } from '../helper/fetchChats';
+import ChatComponent from './ChatComponent';
+import ContactComponent from './ContactComponent';
+
 const MessagesHome = () => {
-  const [chats, setChats] = useState([])
-  const [loading, setIsLoading] = useState(false)
-  const [openMessage, setOpenMessage] = useState(false)
-  const [selectedDid, setSelectedDid] = useState(null)
-  const [senderMessages, setSenderMessages] = useState([])
-  const [showContact, setShowContact] = useState(false)
+  const [chats, setChats] = useState([]);
+  const [loading, setIsLoading] = useState(false);
+  const [openMessage, setOpenMessage] = useState(false);
+  const [selectedDid, setSelectedDid] = useState(null);
+  const [senderMessages, setSenderMessages] = useState([]);
+  const [showContact, setShowContact] = useState(false);
+
   const fetchChatList = async () => {
-    setIsLoading(true)
-    const list = await fetchChats()
-    const transformedList = await transform(list)
-    setChats(transformedList)
-    setIsLoading(false)
-  }
+    setIsLoading(true);
+    const list = await fetchChats();
+    const transformedList = await transform(list);
+    setChats(transformedList);
+    setIsLoading(false);
+  };
 
   useEffect(() => {
-    fetchChatList()
-  }, [])
+    fetchChatList();
+  }, []);
 
   const messageOpen = (did, messages) => {
-    setSelectedDid(did)
-    setSenderMessages(messages)
-    setOpenMessage(true)
-  }
+    setSelectedDid(did);
+    setSenderMessages(messages);
+    setOpenMessage(true);
+  };
 
   const messageClose = () => {
-    setOpenMessage(false)
-  }
+    setOpenMessage(false);
+  };
+
+  const contactsOpen = () => {
+    setShowContact(true);
+  };
+
+  const contactsClose = () => {
+    setShowContact(false);
+  };
 
   return (
     <div className="showMessageContainer">
@@ -39,13 +49,14 @@ const MessagesHome = () => {
         <ChatComponent
           showMessageWindow={messageClose}
           senderDid={selectedDid}
-          messageList={senderMessages}
         />
+      ) : showContact ? (
+        <ContactComponent contactClose={contactsClose} />
       ) : (
         <div className="chatListContainer">
-          <div class="chatListHeader">
+          <div className="chatListHeader">
             <h3>Chats</h3>
-            <button>Contacts</button>
+            <button onClick={contactsOpen}>Contacts</button>
           </div>
 
           {!loading && (
@@ -55,7 +66,10 @@ const MessagesHome = () => {
                   key={index}
                   className="messageItem"
                   onClick={() =>
-                    messageOpen(groupedMessages[0]?.senderDid, groupedMessages)
+                    messageOpen(
+                      groupedMessages[0]?.senderDid,
+                      groupedMessages
+                    )
                   }
                 >
                   <img
@@ -78,8 +92,10 @@ const MessagesHome = () => {
         </div>
       )}
     </div>
-  )
-}
+  );
+};
+
+
 
 const transform = async (records) => {
   const dataList = []

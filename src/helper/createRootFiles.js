@@ -24,7 +24,7 @@ const createContactFiles = async () => {
           status: createStatus,
         } = await web5Instance.dwn.records.create({
           data: {
-            contacts: {},
+            contacts: [{contactName: "sandiaa", contactDid: didString }],
           },
           message: {
             schema: 'https://didcomm.org/uhold/schemas/contact',
