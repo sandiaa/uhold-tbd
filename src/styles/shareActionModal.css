@@ -1,0 +1,51 @@
+/* Modal.css */
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 90vh;
+    height: 90vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Set a higher z-index value */
+  }
+  
+  .modal.open {
+    display: flex;
+  }
+  
+  .modalContent {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* ... Other styles remain the same */
+  
+  
+  .buttonGroup {
+    margin-top: 15px;
+  }
+  
+  .createButton,
+  .cancelcreationButton {
+    margin: 10px;
+  }
+  /* Additional styles */
+  .folderName {
+      width: 80%;
+      margin-bottom: 15px;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+  }
+  .checkBoxStore {
+    font-size: 13px;
+  }

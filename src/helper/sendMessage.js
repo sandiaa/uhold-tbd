@@ -7,7 +7,7 @@ export const sendMessages = async (message, receiverDid) => {
     const { web5Instance, didString } = web5Data
 
     const { record } = await web5Instance.dwn.records.write({
-        data: {message:message,read:false,senderDid: didString, receiverDid: receiverDid},
+        data: {message:message,read:false,senderDid: didString, receiverDid: receiverDid,opened:false},
         message: {
           protocol: "https://didcomm.org/uhold/uholdChat",
           protocolPath: 'message',

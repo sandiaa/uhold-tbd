@@ -1,6 +1,8 @@
 /* fileActionComponent.css */
 .fileItemActions {
     display: flex;
+    position: relative;
+    
   }
   
   .fileActionButton {
@@ -14,4 +16,6 @@
     width: 20px; /* Adjust icon size */
     height: 20px; /* Adjust icon size */
   }
-  
+  /* Modal Styles */
+/* fileActionComponent.css */
+

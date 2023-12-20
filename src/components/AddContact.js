@@ -1,10 +1,14 @@
 // AddContact.js
 
-import React, { useState } from 'react';
-import '../styles/addContact.css'; // Import your CSS file for styling
+import React, { useState } from 'react'
+import '../styles/addContact.css' // Import your CSS file for styling
 
-const AddContact = ({ handleCloseModal, handleSaveContact, newContact, setNewContact }) => {
-
+const AddContact = ({
+  handleCloseModal,
+  handleSaveContact,
+  newContact,
+  setNewContact,
+}) => {
   return (
     <div>
       <div className="addContactModalContent">
@@ -32,10 +36,24 @@ const AddContact = ({ handleCloseModal, handleSaveContact, newContact, setNewCon
             }
           />
         </div>
+        <label>
+          <input
+            type="checkbox"
+            checked={newContact.readReceiptOff}
+            onChange={() =>
+              setNewContact({
+                ...newContact,
+                readReceiptOff: !newContact.readReceiptOff,
+              })
+            }
+          />
+          Check to turn off read receipt
+        </label>
+
         <button onClick={handleSaveContact}>Save Contact</button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default AddContact;
+export default AddContact

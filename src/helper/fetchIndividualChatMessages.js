@@ -71,9 +71,10 @@ const transformChatToDisplay = async (userChats, senderChats) => {
 }
 
 const markMessagesRead = async (senderMessages) => {
-  const web5Data = await connectToWeb5()
-  const { web5Instance, didString } = web5Data
+
   senderMessages.forEach(async (record) => {
+    const web5Data = await connectToWeb5()
+    const { web5Instance, didString } = web5Data
     const recordData = await record.data.json()
     if (!recordData.read) {
       const data = {
@@ -91,9 +92,12 @@ const markMessagesRead = async (senderMessages) => {
           },
         },
       })
-      console.log(records[0])
-      const { status } = await records[0].update({ data: data })
-      console.log(status)
+     console.log(data)
+    const { status } = await records[0].update({ data: { message: recordData.message,
+        read: true,
+        senderDid: recordData.senderDid,
+        receiverDid: recordData.receiverDid} })
+    console.log(status)
     }
   })
 }

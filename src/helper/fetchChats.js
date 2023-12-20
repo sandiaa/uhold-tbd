@@ -9,7 +9,7 @@ export const fetchChats = async () => {
     const { web5Instance, didString } = web5Data
 
 const { record } = await web5Instance.dwn.records.write({
-  data: {message:"hello this is my 2 text message",read:false,senderDid: didString, receiverDid: recDid},
+  data: {message:"hello this is my 2 text message",read:false,senderDid: didString, receiverDid: recDid, opened:false},
   message: {
     protocol: "https://didcomm.org/uhold/uholdChat",
     protocolPath: 'message',

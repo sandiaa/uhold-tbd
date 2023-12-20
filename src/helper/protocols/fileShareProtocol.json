@@ -1,0 +1,20 @@
+{
+    "protocol": "https://didcomm.org/uhold/uholdShare",
+    "published": true,
+    "types": {
+      "file": {
+        "schema": "https://didcomm.org/uhold/schemas/fileShare",
+        "dataFormats": ["application/json"]
+      }
+    },
+    "structure": {
+        "file": {
+          "$actions": [
+            { "who": "anyone", "can": "write" },
+            { "who": "author", "of": "file", "can": "read" },
+            { "who": "recipient", "of": "file", "can": "read" },
+            { "who": "author", "of": "file", "can": "update" }
+          ]
+      }
+    }
+  }

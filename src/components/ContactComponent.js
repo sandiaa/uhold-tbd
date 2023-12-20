@@ -12,6 +12,7 @@ const ContactComponent = ({ contactClose }) => {
   const [newContact, setNewContact] = useState({
     contactName: '',
     contactDid: '',
+    readReceiptOff: false
   })
   const [displayContact, setDisplayContact] = useState([])
   const handleContactClick = (contact) => {
@@ -19,7 +20,6 @@ const ContactComponent = ({ contactClose }) => {
   }
   const fetchContactsList = async () => {
     const contactList = await fetchContacts()
-    let transfomedContactList = []
     const list = await contactList[0].data.json()
     setDisplayContact(list.contacts)
   }
