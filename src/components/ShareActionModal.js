@@ -1,27 +1,73 @@
+import React, { useState, useEffect } from 'react'
+import '../styles/shareActionModal.css' // CSS file for styling
+import { connect } from 'react-redux'
 
-import React, { useState } from 'react';
-import '../styles/shareActionModal.css'; // CSS file for styling
+const ShareActionModal = ({ isOpen, onClose, onShare, contactlist }) => {
+  const [isDropOpen, setIsDropOpen] = useState(false)
+  const [isShareInPublic, setIsShareInPublic] = useState(false)
+  const [selectedOption, setSelectedOption] = useState({ contactDid: '' })
+  const [options, setOptions] = useState(contactlist.contacts.contacts)
+  const handleOptionSelect = (option) => {
+    setSelectedOption(option)
+    setIsDropOpen(false)
+  }
+  const shareMe = () => {
+    onShare(isShareInPublic, isShareInPublic ? '' : selectedOption.contactDid)
+  }
 
-const ShareActionModal = ({ isOpen, onClose, onCreate }) => {
-
-  
   return (
     <div className={`modal ${isOpen ? 'open' : ''}`}>
       <div className="modalContent">
-        <h2>Create Folder</h2>
-        <input
-          type="text"
-          placeholder="Folder Name"
-          className="folderName"
-        />
-       
+        <h2>Share</h2>
+        {!isShareInPublic && (
+          <div>
+            <input
+              type="text"
+              placeholder="Did or contact name"
+              className="folderName"
+              value={selectedOption.contactName}
+              onChange={(e) => setSelectedOption(e.target.value)}
+              onClick={() => {
+                options.length > 0 ? setIsDropOpen(true) : setIsDropOpen(false)
+              }}
+            />
+          </div>
+        )}
+        {isDropOpen && !isShareInPublic && (
+          <div className="dropdown">
+            {options.map((option) => (
+              <div
+                key={option.contactDid}
+                onClick={() => handleOptionSelect(option)}
+              >
+                {option.contactName}
+              </div>
+            ))}
+          </div>
+        )}
+        <button
+          className={`shareInPublicButton ${isShareInPublic ? 'true' : ''}`}
+          onClick={() => setIsShareInPublic(!isShareInPublic)}
+        >
+          Share in Public
+        </button>
         <div className="buttonGroup">
-          <button className="createButton">Create</button>
-          <button className="cancelcreationButton">Cancel</button>
+          <button className="createButton" onClick={shareMe}>
+            Share
+          </button>
+          <button className="cancelcreationButton" onClick={onClose}>
+            Cancel
+          </button>
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ShareActionModal;
+const mapStateToProps = (state) => {
+  return {
+    contactlist: state.contacts || {},
+  }
+}
+
+export default connect(mapStateToProps)(ShareActionModal)

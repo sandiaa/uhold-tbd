@@ -1,47 +1,47 @@
-import React, { useEffect, useState } from 'react';
-import '../styles/messagesHome.css';
-import folder from '../assets/folder.png';
-import { fetchChats } from '../helper/fetchChats';
-import ChatComponent from './ChatComponent';
-import ContactComponent from './ContactComponent';
+import React, { useEffect, useState } from 'react'
+import '../styles/messagesHome.css'
+import folder from '../assets/folder.png'
+import { fetchChats } from '../helper/fetchChats'
+import ChatComponent from './ChatComponent'
+import ContactComponent from './ContactComponent'
+import { connect } from 'react-redux'
 
-const MessagesHome = () => {
-  const [chats, setChats] = useState([]);
-  const [loading, setIsLoading] = useState(false);
-  const [openMessage, setOpenMessage] = useState(false);
-  const [selectedDid, setSelectedDid] = useState(null);
-  const [senderMessages, setSenderMessages] = useState([]);
-  const [showContact, setShowContact] = useState(false);
+const MessagesHome = ({userDetails}) => {
+  const [chats, setChats] = useState([])
+  const [loading, setIsLoading] = useState(false)
+  const [openMessage, setOpenMessage] = useState(false)
+  const [selectedDid, setSelectedDid] = useState(null)
+  const [user, setUser] = useState(userDetails)
+  const [showContact, setShowContact] = useState(false)
 
   const fetchChatList = async () => {
-    setIsLoading(true);
-    const list = await fetchChats();
-    const transformedList = await transform(list);
-    setChats(transformedList);
-    setIsLoading(false);
-  };
+    setIsLoading(true)
+    const list = await fetchChats()
+    const transformedList = await transform(list,userDetails)
+    setChats(transformedList)
+    setIsLoading(false)
+  }
 
   useEffect(() => {
-    fetchChatList();
-  }, []);
+    fetchChatList()
+  }, [])
 
-  const messageOpen = (did, messages) => {
-    setSelectedDid(did);
-    setSenderMessages(messages);
-    setOpenMessage(true);
-  };
+  const messageOpen = (did) => {
+    setSelectedDid(did)
+    setOpenMessage(true)
+  }
 
   const messageClose = () => {
-    setOpenMessage(false);
-  };
+    setOpenMessage(false)
+  }
 
   const contactsOpen = () => {
-    setShowContact(true);
-  };
+    setShowContact(true)
+  }
 
   const contactsClose = () => {
-    setShowContact(false);
-  };
+    setShowContact(false)
+  }
 
   return (
     <div className="showMessageContainer">
@@ -61,29 +61,22 @@ const MessagesHome = () => {
 
           {!loading && (
             <ul className="contactList">
-              {chats.map((groupedMessages, index) => (
+              {chats.map((message, index) => (
                 <li
                   key={index}
                   className="messageItem"
-                  onClick={() =>
-                    messageOpen(
-                      groupedMessages[0]?.senderDid,
-                      groupedMessages
-                    )
-                  }
+                  onClick={() => messageOpen(message?.did)}
                 >
                   <img
                     src={folder}
-                    alt={groupedMessages[0]?.did}
+                    alt={message?.did}
                     className="messageImage"
                   />
                   <div className="messageInfo">
-                    <div className="messageName">
-                      {groupedMessages[0]?.senderDid}
-                    </div>
-                    <div className="unreadCount">
-                      {fetchUnreadCount(groupedMessages)}
-                    </div>
+                    <div className="messageName">{message?.did}</div>
+                    {message.unread !== 0 && (
+                      <div className="unreadCount">{message.unread}</div>
+                    )}
                   </div>
                 </li>
               ))}
@@ -92,14 +85,17 @@ const MessagesHome = () => {
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
+const mapStateToProps = (state) => {
+  return {
+    userDetails: state.user.user || {},
+  }
+}
 
-
-const transform = async (records) => {
+const transform = async (records, userDetails) => {
   const dataList = []
-
   // Use Promise.all to wait for all asynchronous operations to complete
   await Promise.all(
     records.map(async (item) => {
@@ -119,26 +115,36 @@ const transform = async (records) => {
       dataList.push(transformedItem)
     }),
   )
-
-  const groupedItems = dataList.reduce((grouped, item) => {
-    const { senderDid } = item
-    if (!grouped[senderDid]) {
-      grouped[senderDid] = []
+  const finalList = []
+  dataList.forEach((mainItem) => {
+    let didToCompare = ''
+    if (mainItem.senderDid !== userDetails.did) {
+      didToCompare = mainItem.senderDid
+    } else {
+      didToCompare = mainItem.receiverDid
     }
-    grouped[senderDid].push(item)
-    return grouped
-  }, {})
-  return Object.values(groupedItems) // Return array of grouped messages
-}
 
-const fetchUnreadCount = (messageList) => {
-  let count = 0
-  messageList.forEach((element) => {
-    if (!element.messageData.unread) {
-      count = count + 1
+    const index = finalList.findIndex((item) => item.did === didToCompare)
+
+    if (index !== -1) {
+      if (!mainItem.messageData.read && mainItem.senderDid !== userDetails.did) {
+        finalList[index].unread++
+      }
+    } else {
+      let unread = 0
+      if (!mainItem.messageData.read && mainItem.senderDid !== userDetails.did) {
+        unread++
+      }
+      const itemToPush = {
+        did: didToCompare,
+        unread: unread,
+      }
+      finalList.push(itemToPush)
     }
   })
-  return count
+  return finalList
+
 }
 
-export default MessagesHome
+
+export default connect(mapStateToProps)(MessagesHome)

@@ -41,7 +41,9 @@ const ContactComponent = ({ contactClose }) => {
 
   const handleSaveContact = () => {
     addNewContact(newContact)
-    setNewContact({ name: '', id: '' })
+    setNewContact({ contactName: '',
+    contactDid: '',
+    readReceiptOff: false})
     setShowModal(false)
   }
 

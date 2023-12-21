@@ -11,5 +11,7 @@ export const addNewContact = async (data) => {
     const { status } = await contactRecord[0].update({
       data: { contacts: dataToBeUpdated },
     })
+    console.log("added contact", status)
   }
+
 }

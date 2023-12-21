@@ -1,69 +1,75 @@
-import React, { useState, useEffect } from 'react';
-import '../styles/fileActionComponent.css';
-import share from '../assets/share.png';
-import deleteIcon from '../assets/delete.png';
-import { createShared } from '../helper/createShared';
-import starSelected from '../assets/starSelected.png';
-import starUnselected from '../assets/starUnselected.png';
-import { fetchArecord } from '../helper/fetchArecord';
-import undoDelete from '../assets/undoDelete.png';
-import ShareActionModal from './ShareActionModal';
-const FileActionComponent = ({ file, fileOnDelete, fileOnRetrieve, fileStarred }) => {
-  const [isStarred, setIsStarred] = useState('');
-  const [loading, setIsLoading] = useState(false);
-  const [shareFlag, setShareFlag] = useState(false);
+import React, { useState, useEffect } from 'react'
+import '../styles/fileActionComponent.css'
+import share from '../assets/share.png'
+import deleteIcon from '../assets/delete.png'
+import { createShared } from '../helper/createShared'
+import starSelected from '../assets/starSelected.png'
+import starUnselected from '../assets/starUnselected.png'
+import { fetchArecord } from '../helper/fetchArecord'
+import undoDelete from '../assets/undoDelete.png'
+import ShareActionModal from './ShareActionModal'
+const FileActionComponent = ({
+  file,
+  fileOnDelete,
+  fileOnRetrieve,
+  fileStarred,
+}) => {
+  const [isStarred, setIsStarred] = useState('')
+  const [loading, setIsLoading] = useState(false)
+  const [shareFlag, setShareFlag] = useState(false)
 
-  const shareMe = () => {
-    setShareFlag(true);
-    // createShared(file.recordId)
-    setShareFlag(false);
-  };
+  const shareFile = (isPublicShare, shareToDid) => {
+     createShared(file.recordId, isPublicShare, shareToDid)
+     setShareFlag(false)
+  }
 
+ 
   const deleteMe = async () => {
-    setIsLoading(true);
-    const record = await fetchArecord(file.recordId);
-    const recData = await record[0].data.json();
-    recData.deleted = true;
-    const response = await record[0].update({ data: recData });
+    setIsLoading(true)
+    const record = await fetchArecord(file.recordId)
+    const recData = await record[0].data.json()
+    recData.deleted = true
+    const response = await record[0].update({ data: recData })
     if (response.status.code) {
-      fileOnDelete();
-      setIsLoading(false);
+      fileOnDelete()
+      setIsLoading(false)
     }
-  };
+  }
 
   const StarMe = async () => {
-    const record = await fetchArecord(file.recordId);
-    const recData = await record[0].data.json();
-    recData.starred = !isStarred;
-    const response = await record[0].update({ data: recData });
+    const record = await fetchArecord(file.recordId)
+    const recData = await record[0].data.json()
+    recData.starred = !isStarred
+    const response = await record[0].update({ data: recData })
     if (response.status.code === 202) {
-      setIsStarred(recData.starred);
-      fileStarred(recData.starred);
+      setIsStarred(recData.starred)
+      fileStarred(recData.starred)
     }
-  };
+  }
 
   const retrieveMe = async () => {
-    setIsLoading(true);
-    const record = await fetchArecord(file.recordId);
-    const recData = await record[0].data.json();
-    recData.deleted = false;
-    const response = await record[0].update({ data: recData });
+    setIsLoading(true)
+    const record = await fetchArecord(file.recordId)
+    const recData = await record[0].data.json()
+    recData.deleted = false
+    const response = await record[0].update({ data: recData })
     if (response.status.code === 202) {
-      fileOnRetrieve();
-      setIsLoading(false);
+      fileOnRetrieve()
+      setIsLoading(false)
     }
-  };
+  }
 
   useEffect(() => {
-    setIsStarred(file.starred);
-  }, [loading]);
+    setIsStarred(file.starred)
+  }, [loading])
 
   return (
     <div>
       <ShareActionModal
-          isOpen={shareFlag}
-          onClose={() => setShareFlag(false)}
-        />
+        isOpen={shareFlag}
+        onClose={() => setShareFlag(false)}
+        onShare={shareFile}
+      />
       <div className="fileItemActions">
         {!loading && !file.deleted ? (
           <div>
@@ -74,7 +80,7 @@ const FileActionComponent = ({ file, fileOnDelete, fileOnRetrieve, fileStarred }
                 className="fileImage"
               />
             </button>
-            <button className="fileActionButton" onClick={shareMe}>
+            <button className="fileActionButton" onClick={() => setShareFlag(true)}>
               <img src={share} alt="Share" className="fileImage" />
             </button>
             <button className="fileActionButton" onClick={deleteMe}>
@@ -92,7 +98,7 @@ const FileActionComponent = ({ file, fileOnDelete, fileOnRetrieve, fileStarred }
         ) : null}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default FileActionComponent;
+export default FileActionComponent

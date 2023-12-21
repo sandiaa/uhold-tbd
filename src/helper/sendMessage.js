@@ -1,7 +1,6 @@
 import { connectToWeb5 } from './web5ConnectHelper'
 
 export const sendMessages = async (message, receiverDid) => {
-    console.log(message)
   const web5Data = await connectToWeb5()
   if (web5Data) {
     const { web5Instance, didString } = web5Data
@@ -17,6 +16,8 @@ export const sendMessages = async (message, receiverDid) => {
         },
       })
       const { status: recordSendstatus } = await record.send(receiverDid)
+      const { status: recordSendtoMyDWNstatus } = await record.send(didString)
+
       console.log("recordSendstatus",recordSendstatus)
   }
 }

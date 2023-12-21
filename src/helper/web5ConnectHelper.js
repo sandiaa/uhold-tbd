@@ -10,3 +10,12 @@ export const connectToWeb5 = async () => {
   }
 };
 
+export const fetchUserDetails = async () => {
+  try {
+    const { web5, did } = await Web5.connect({sync:'5s'});
+    return { did : did};
+  } catch (error) {
+    console.error('Error connecting to Web5:', error);
+    return null;
+  }
+}

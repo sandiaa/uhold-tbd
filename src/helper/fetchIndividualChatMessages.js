@@ -92,7 +92,6 @@ const markMessagesRead = async (senderMessages) => {
           },
         },
       })
-     console.log(data)
     const { status } = await records[0].update({ data: { message: recordData.message,
         read: true,
         senderDid: recordData.senderDid,

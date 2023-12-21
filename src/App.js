@@ -7,8 +7,11 @@ import FolderViewer from './components/FolderViewer';
 import BrandLoginPage from './components/BrandLoginPage';
 import BrandFilesView from './components/BrandFilesView';
 import MainPage from './components/MainPage';
+import { Provider } from 'react-redux';
+import store from './helper/redux/store';
 function App() {
   return (
+    <Provider store={store}>
     <Router>
     <Switch>
       <Route exact path="/" component={UserInput} />
@@ -20,7 +23,7 @@ function App() {
       <Route exact path="/brandFilesView/:id" component={BrandFilesView} />
     </Switch>
   </Router>
-  
+  </Provider>
   );
 }
 
