@@ -1,14 +1,16 @@
 import '../styles/landing.css' // CSS file for styling
 import SmallButton from './Button'
 import FileListContainer from './FileListContainer'
-import React, { useState, useRef, useEffect, useLayoutEffect } from 'react'
-import CreateFolder from './CreateFolder'
+import React, { useState, useEffect } from 'react'
 import { fetchRootFiles } from '../helper/fetchFiles'
 import { createRootFolder } from '../helper/createRootFolder'
 import UtilityComponent from './UtilityComponent'
 import { fetchBrandFiles } from '../helper/fetchBrandFiles'
 import { createRootFiles } from '../helper/createRootFiles'
+import { fetchShared } from '../helper/fetchShared'
 const Landing = () => {
+  fetchShared()
+
   const [rootFiles, setRootFiles] = useState([])
   const [brandFiles, setBrandFiles] = useState([])
   const [rootId, setRootId] = useState({})
