@@ -50,13 +50,16 @@ export const configureBrandProtocol = async (brandProtocolLink) => {
         },
       })
       if (createStatus.code == 202) {
-        console.log('Protocol configured', configureStatus, protocol)
+        // console.log('Protocol configured', configureStatus, protocol)
+        
+       const { status: configureRemoteStatus } = await protocol.send(didString);
+       //  console.log('Protocol configured on remote DWN', configureRemoteStatus);
         return true
       }
+      else{
+        return false
+      }
     }
-    //     //configuring protocol on remote DWN
-    //    const { status: configureRemoteStatus } = protocol.send(didString);
-    //    console.log('Protocol configured on remote DWN', configureRemoteStatus);
   }
   return false
 }

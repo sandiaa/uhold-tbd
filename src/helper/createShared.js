@@ -1,6 +1,7 @@
 import { connectToWeb5 } from './web5ConnectHelper'
 
 export const createShared = async (fileRecordId, isPublic, recipientDid) => {
+  console.log("fff")
   const web5Data = await connectToWeb5()
   if (web5Data) {
     const { web5Instance, didString } = web5Data
@@ -22,7 +23,6 @@ export const createShared = async (fileRecordId, isPublic, recipientDid) => {
             protocolPath: 'file',
             schema: 'https://didcomm.org/uhold/schemas/fileShare',
             dataFormat: 'application/json',
-            recipient: recipientDid,
           },
         })
         const { status: filesharestatus } = await record.send(recipientDid)

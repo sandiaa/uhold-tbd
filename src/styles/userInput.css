@@ -11,6 +11,10 @@ body {
     align-items: center;
     height: 100vh;
   }
+  .logoImage{
+    height: 50px;
+    width: 50px;
+  }
   
   .content {
     display: flex;
@@ -61,4 +65,4 @@ body {
     font-size: 14px;
     margin-top: 5px;
   }
-  
+ 

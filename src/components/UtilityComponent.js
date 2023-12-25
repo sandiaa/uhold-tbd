@@ -50,6 +50,7 @@ const UtilityComponent = ({
     showTrashPage()
   }
   return (
+    <div>
     <div className="buttonGroup">
       <div>
         {showTrashValue ? (
@@ -78,6 +79,7 @@ const UtilityComponent = ({
           <img src={trash} alt="Trash Icon" className="icon" />
         </div>
       )}
+    </div>
     </div>
   )
 }

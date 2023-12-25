@@ -1,5 +1,5 @@
 import { connectToWeb5 } from './web5ConnectHelper'
-
+import { createContactPairSetting } from './createContactPairSetting'
 export const fetchIndividualChatMessages = async (receiverDid) => {
   const web5Data = await connectToWeb5()
   if (web5Data) {
@@ -26,7 +26,7 @@ export const fetchIndividualChatMessages = async (receiverDid) => {
         },
       },
     })
-    markMessagesRead(senderChats)
+    createContactPairSetting(receiverDid)
     const trasnformedlist = await transformChatToDisplay(userChats, senderChats)
     return trasnformedlist
   }
@@ -70,33 +70,33 @@ const transformChatToDisplay = async (userChats, senderChats) => {
   }
 }
 
-const markMessagesRead = async (senderMessages) => {
+// const markMessagesRead = async (senderMessages) => {
 
-  senderMessages.forEach(async (record) => {
-    const web5Data = await connectToWeb5()
-    const { web5Instance, didString } = web5Data
-    const recordData = await record.data.json()
-    if (!recordData.read) {
-      const data = {
-        message: recordData.message,
-        read: true,
-        senderDid: recordData.senderDid,
-        receiverDid: recordData.receiverDid,
-      }
-      console.log(record._recordId)
-      const { records } = await web5Instance.dwn.records.query({
-        from: didString,
-        message: {
-          filter: {
-            recordId: record._recordId,
-          },
-        },
-      })
-    const { status } = await records[0].update({ data: { message: recordData.message,
-        read: true,
-        senderDid: recordData.senderDid,
-        receiverDid: recordData.receiverDid} })
-    console.log(status)
-    }
-  })
-}
+//   senderMessages.forEach(async (record) => {
+//     const web5Data = await connectToWeb5()
+//     const { web5Instance, didString } = web5Data
+//     const recordData = await record.data.json()
+//     if (!recordData.read) {
+//       const data = {
+//         message: recordData.message,
+//         read: true,
+//         senderDid: recordData.senderDid,
+//         receiverDid: recordData.receiverDid,
+//       }
+//       console.log(record._recordId)
+//       const { records } = await web5Instance.dwn.records.query({
+//         from: didString,
+//         message: {
+//           filter: {
+//             recordId: record._recordId,
+//           },
+//         },
+//       })
+//     const { status } = await records[0].update({ data: { message: recordData.message,
+//         read: true,
+//         senderDid: recordData.senderDid,
+//         receiverDid: recordData.receiverDid} })
+//     console.log(status)
+//     }
+//   })
+// }

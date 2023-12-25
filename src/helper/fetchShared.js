@@ -12,6 +12,7 @@ if (web5Data) {
       filter: {
         protocol: 'https://didcomm.org/uhold/uholdShare',
         protocolPath: 'file',
+        recipient:didString
       },
     },
   })

@@ -7,10 +7,10 @@
   
   /* Set 70% width for landingComponent */
   .landingComponent {
-    flex: 7; /* Take 70% of available space */
+    flex: 9; /* Take 70% of available space */
     height: 100vh; /* Adjust the height as needed */
     overflow-y: auto; /* Enable vertical scrolling */
-    width: 70%;
+    width: 80%;
   }
   .chat {
     flex: 3; /* Take 30% of available space */

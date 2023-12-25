@@ -1,0 +1,96 @@
+{
+  "protocol": "https://didcomm.org/filesystem",
+  "published": true,
+  "types": {
+    "folder": {
+      "schema": "https://didcomm.org/filesystem/schemas/folder.json",
+      "dataFormats": ["application/json"]
+    },
+    "file": {
+      "schema": "https://didcomm.org/filesystem/schemas/file.json",
+      "dataFormats": ["application/json", "application/pdf", "image/jpeg", "text/plain"]
+    },
+    "sharedAccess": {
+      "schema": "https://didcomm.org/filesystem/schemas/sharedAccess.json",
+      "dataFormats": ["application/json"]
+    }
+  },
+  "structure": {
+    "folder": {
+      "$actions": [
+        {
+          "who": "author",
+          "of": "folder",
+          "can": "read"
+        },
+        {
+          "who": "author",
+          "of": "folder",
+          "can": "write"
+        },
+        {
+          "who": "recipient",
+          "of": "sharedAccess",
+          "can": "read"
+        }
+      ],
+      "subFolder": {
+        "$actions": [
+          {
+            "who": "author",
+            "of": "subFolder",
+            "can": "read"
+          },
+          {
+            "who": "author",
+            "of": "subFolder",
+            "can": "write"
+          },
+          {
+            "who": "recipient",
+            "of": "sharedAccess",
+            "can": "read"
+          }
+        ]
+      },
+      "file": {
+        "$actions": [
+          {
+            "who": "author",
+            "of": "file",
+            "can": "read"
+          },
+          {
+            "who": "author",
+            "of": "file",
+            "can": "write"
+          },
+          {
+            "who": "recipient",
+            "of": "sharedAccess",
+            "can": "read"
+          }
+        ]
+      },
+      "sharedAccess": {
+        "$actions": [
+          {
+            "who": "author",
+            "of": "folder",
+            "can": "write"
+          },
+          {
+            "who": "author",
+            "of": "file",
+            "can": "write"
+          },
+          {
+            "who": "author",
+            "of": "sharedAccess",
+            "can": "write"
+          }
+        ]
+      }
+    }
+  }
+}

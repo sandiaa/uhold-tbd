@@ -1,0 +1,11 @@
+/* Loader.css */
+.loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Take full viewport height */
+    font-size: 20px;
+    color: #333;
+    /* You can add more styles or animations here */
+  }
+  

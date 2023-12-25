@@ -1,6 +1,7 @@
 import { connectToWeb5 } from './web5ConnectHelper'
 import { fetchContacts } from './fetchContacts'
 export const addNewContact = async (data) => {
+  console.log(data)
   const contactRecord = await fetchContacts()
   const list = await contactRecord[0].data.json()
   const dataToBeUpdated = list.contacts

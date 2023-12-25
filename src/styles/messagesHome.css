@@ -11,6 +11,15 @@
   background-color: rgba(0, 0, 0, 0.05);  
   margin: 10px;
   border-radius: 5px;
+  width: 75%;
+}
+.copyButton {
+  background-color: #f0f0f0; /* Light grey background */
+  color: #000; /* Black text */
+  border: 1px solid #d0d0d0; /* Light grey border */
+  cursor: pointer;
+  padding: 5px 10px;
+  margin-left: 10px; /* Space from the name */
 }
 
 /* Style for contact image */

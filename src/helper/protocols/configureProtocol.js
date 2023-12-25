@@ -15,7 +15,6 @@ export const configureProtocol = async () => {
     });
 
     if(status.code !== 200) {
-        alert('Error querying protocols');
         console.error('Error querying protocols', status);
         return;
     }
@@ -35,7 +34,7 @@ export const configureProtocol = async () => {
     console.log('Protocol configured', configureStatus, protocol);
 
     //configuring protocol on remote DWN
-   const { status: configureRemoteStatus } = protocol.send(didString);
+   const { status: configureRemoteStatus } = await protocol.send(didString);
    console.log('Protocol configured on remote DWN', configureRemoteStatus);
 }
 }

@@ -68,7 +68,7 @@ const configureChatProtocol = async () => {
     console.log('chat protocol configured', configureStatus, protocol);
 
     //configuring protocol on remote DWN
-   const { status: configureRemoteStatus } = protocol.send(didString);
+   const { status: configureRemoteStatus } = await protocol.send(didString);
    console.log('Protocol configured on remote DWN', configureRemoteStatus);
 }
 }
@@ -106,7 +106,7 @@ const configureFileShareProtocol = async () => {
   console.log('fileShare protocol configured', configureStatus, protocol);
 
   //configuring protocol on remote DWN
- const { status: configureRemoteStatus } = protocol.send(didString);
+ const { status: configureRemoteStatus } = await protocol.send(didString);
  console.log('fileShare Protocol configured on remote DWN', configureRemoteStatus);
 
 }}

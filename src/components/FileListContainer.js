@@ -11,14 +11,17 @@ const FileListContainer = ({ list, onFileDelete, showTrashValue }) => {
   const [displayList, setDisplayList] = useState([])
   const [isSortByDate, setIsSortByDate] = useState(false)
   const [isSortByStarred, setIsSortByStarred] = useState(false)
-
+  const [loading, setLoading] = useState(false)
   useEffect(() => {
     async function transformRecords() {
+      setLoading(true)
       const dataList = showTrashValue
         ? await fetchTrashFiles(list)
         : await transformList(list)
       setFilesList(dataList)
       setDisplayList(dataList)
+      setLoading(false)
+
     }
 
     transformRecords()
@@ -78,15 +81,21 @@ const FileListContainer = ({ list, onFileDelete, showTrashValue }) => {
   )
 
   return (
+    <div>
+    {!loading &&
     <div className="fileListContainer">
+      {filesList.length != 0 &&
       <div className="sortOptions">
         <button onClick={sortByDate}>Sort by Date (recent to oldest)</button>
         <button onClick={sortByStarred}>Starred</button>
-        {/* Add other sorting options */}
-      </div>
+        <p style={{marginLeft: '5px'}}>Processing!</p>
+      </div>}
       <div>
         {displayList.length === 0 ? (
-          <p>No files found</p>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
+        <p>No files found</p>
+      </div>
+      
         ) : (
           <div className="fileColumns">
             {columns.map((column, columnIndex) => (
@@ -104,9 +113,9 @@ const FileListContainer = ({ list, onFileDelete, showTrashValue }) => {
               </div>
             ))}
           </div>
-        )}{' '}
+        )}
       </div>
-    </div>
+    </div>}</div>
   )
 }
 

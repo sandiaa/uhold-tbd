@@ -1,5 +1,4 @@
 import '../styles/landing.css' // CSS file for styling
-import SmallButton from './Button'
 import FileListContainer from './FileListContainer'
 import React, { useState, useEffect } from 'react'
 import { fetchRootFiles } from '../helper/fetchFiles'

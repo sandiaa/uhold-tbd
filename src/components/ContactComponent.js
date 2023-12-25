@@ -5,6 +5,7 @@ import { fetchContacts } from '../helper/fetchContacts'
 import { addNewContact } from '../helper/addNewContact'
 import ChatComponent from './ChatComponent'
 const ContactComponent = ({ contactClose }) => {
+  const [loading, setLoading] = useState(false)
   const [selectedContact, setSelectedContact] = useState(null)
   const [showModal, setShowModal] = useState(false)
   const [showMessage, setShowMessage] = useState(false)
@@ -12,16 +13,19 @@ const ContactComponent = ({ contactClose }) => {
   const [newContact, setNewContact] = useState({
     contactName: '',
     contactDid: '',
-    readReceiptOff: false
+    readReceiptOff: false,
+
   })
   const [displayContact, setDisplayContact] = useState([])
   const handleContactClick = (contact) => {
     setSelectedContact(contact)
   }
   const fetchContactsList = async () => {
+    setLoading(true)
     const contactList = await fetchContacts()
     const list = await contactList[0].data.json()
     setDisplayContact(list.contacts)
+    setLoading(false)
   }
 
   useEffect(() => {
@@ -63,6 +67,7 @@ const ContactComponent = ({ contactClose }) => {
           showMessageWindow={closeSendMessage}
         />
       )}
+
       <div className="parentContainerContact">
         <div className="addContact">
           {/* AddContact component rendering */}
@@ -89,7 +94,13 @@ const ContactComponent = ({ contactClose }) => {
               )}
             </h3>
           </div>
-
+          {loading? 
+             <div style={{display: 'flex', alignContent: 'center', justifyContent: 'center'}}>Loading ...</div> : null}
+            
+          {!loading && displayContact.length == 0 ? 
+                       <div style={{display: 'flex', alignContent: 'center',
+                        justifyContent: 'center'}}>No Contacts</div> : null}
+                
           <ul className="contactList">
             {displayContact.map((contact, index) => (
               <li key={index} className="contactItem">

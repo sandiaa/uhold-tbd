@@ -10,48 +10,58 @@ import { fetchUserDetails } from '../helper/web5ConnectHelper';
 
 const MainPage = () => {
   const dispatch = useDispatch();
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingContacts, setIsLoadingContacts] = useState(false);
+  const [isLoadingUser, setIsLoadingUser] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchContactsList = async () => {
-      setIsLoading(true);
+      setIsLoadingContacts(true);
       try {
         const contactList = await fetchContacts();
-        if (contactList.length !== undefined) {
+        if (Array.isArray(contactList) && contactList.length > 0) {
           const list = await contactList[0].data.json();
           dispatch(setContacts(list));
         }
       } catch (error) {
+        setError('Error fetching contacts data');
         console.error('Error fetching contacts data:', error);
-        // Handle error or dispatch an error action if needed
       }
+      setIsLoadingContacts(false);
+    };
 
+    const fetchUserData = async () => {
+      setIsLoadingUser(true);
       try {
         const user = await fetchUserDetails();
         dispatch(setUser(user));
       } catch (error) {
+        setError('Error fetching user details');
         console.error('Error fetching user details:', error);
-        // Handle error or dispatch an error action if needed
       }
-
-      setIsLoading(false);
+      setIsLoadingUser(false);
     };
 
     fetchContactsList();
+    fetchUserData();
   }, [dispatch]);
 
+  if (isLoadingContacts || isLoadingUser) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
   return (
-    <div>
-      {!isLoading && (
-        <div className="mainPageContainer">
-          <div className="landingComponent">
-            <Landing />
-          </div>
-          <div className="chat">
-            <MessagesHome />
-          </div>
-        </div>
-      )}
+    <div className="mainPageContainer">
+      <div className="landingComponent">
+        <Landing />
+      </div>
+      <div className="chat">
+        <MessagesHome />
+      </div>
     </div>
   );
 };

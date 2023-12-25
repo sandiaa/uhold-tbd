@@ -2,6 +2,7 @@ import { connectToWeb5 } from './web5ConnectHelper'
 import rootProtocol from './protocols/rootProtocol.json'
 
 export const createFiles = async (file, rootRecord,isSubFolder) => {
+  console.log(file, rootRecord)
   const web5Data = await connectToWeb5()
   if (web5Data) {
     const { web5Instance, didString } = web5Data
