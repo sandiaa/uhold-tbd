@@ -1,7 +1,6 @@
 import { connectToWeb5 } from './web5ConnectHelper'
 import { fetchContacts } from './fetchContacts'
 export const addNewContact = async (data) => {
-  console.log(data)
   const contactRecord = await fetchContacts()
   const list = await contactRecord[0].data.json()
   const dataToBeUpdated = list.contacts
@@ -12,7 +11,7 @@ export const addNewContact = async (data) => {
     const { status } = await contactRecord[0].update({
       data: { contacts: dataToBeUpdated },
     })
-    console.log("added contact", status)
+    if (status.code === 202) return true
+    else return false
   }
-
 }

@@ -18,30 +18,29 @@ const MessagesHome = ({ userDetails, contactsList }) => {
     // Function to fetch and update the chat list
     const fetchAndUpdateChatList = async () => {
       try {
-        setIsLoading(true);
-        const list = await fetchChats();
-        const transformedList = await transform(list, userDetails, contactsList);
-        setChats(transformedList);
-        setIsLoading(false);
+        setIsLoading(true)
+        const list = await fetchChats()
+        const transformedList = await transform(list, userDetails, contactsList)
+        setChats(transformedList)
+        setIsLoading(false)
       } catch (error) {
-        console.error('Error fetching and updating chat list:', error);
+        console.error('Error fetching and updating chat list:', error)
         // Handle the error appropriately
       } finally {
-        setIsLoading(false);
+        setIsLoading(false)
       }
-    };
-  
-    // Fetch chat list initially
-    fetchAndUpdateChatList();
-  
-    // Set up an interval to fetch chat list every 30 seconds
-    const intervalId = setInterval(fetchAndUpdateChatList, 30000);
-  
-    // Clear the interval when the component unmounts
-    return () => clearInterval(intervalId);
-  }, [userDetails, contactsList]);
+    }
 
-  
+    // Fetch chat list initially
+    fetchAndUpdateChatList()
+
+    // Set up an interval to fetch chat list every 30 seconds
+    const intervalId = setInterval(fetchAndUpdateChatList, 30000)
+
+    // Clear the interval when the component unmounts
+    return () => clearInterval(intervalId)
+  }, [userDetails, contactsList])
+
   const messageOpen = (message) => {
     setSelectedDid(message.did)
     setOpenMessage(true)
@@ -74,16 +73,36 @@ const MessagesHome = ({ userDetails, contactsList }) => {
         <div className="chatListContainer">
           <div className="chatListHeader">
             <h3>Chats</h3>
+            <button onClick={contactsOpen}>Group</button>
+
             <button onClick={contactsOpen}>Contacts</button>
           </div>
-          {loading? 
-             <div style={{display: 'flex', alignContent: 'center', justifyContent: 'center'}}>Loading ...</div> : null}
-             {!loading && chats.length ==0 ? 
-             <div style={{display: 'flex', alignContent: 'center', justifyContent: 'center'}}>No Chats</div> : null}
+          {loading ? (
+            <div
+              style={{
+                display: 'flex',
+                alignContent: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              Loading ...
+            </div>
+          ) : null}
+          {!loading && chats.length == 0 ? (
+            <div
+              style={{
+                display: 'flex',
+                alignContent: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              No Chats
+            </div>
+          ) : null}
           {!loading && (
             <ul className="contactList">
               {chats.map((message, index) => (
-            <div style={{ display: 'flex' }}>
+                <div style={{ display: 'flex' }} key={index}>
                   <li
                     key={index}
                     className="messageItem"
@@ -106,7 +125,11 @@ const MessagesHome = ({ userDetails, contactsList }) => {
                     </div>
                   </li>
                   <div key={message.did}>
-                  <button onClick={() => navigator.clipboard.writeText(message.did)}>copy did</button>
+                    <button
+                      onClick={() => navigator.clipboard.writeText(message.did)}
+                    >
+                      copy did
+                    </button>
                   </div>
                 </div>
               ))}

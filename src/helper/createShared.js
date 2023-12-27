@@ -29,7 +29,6 @@ export const createShared = async (fileRecordId, isPublic, recipientDid) => {
           },
         }) 
         const { status: filesharestatus } = await record.send(recipientDid)
-        console.log("iam not public sent to reci")
 
         const { status: filetoMyDWNstatus } = await record.send(didString)
       } else {

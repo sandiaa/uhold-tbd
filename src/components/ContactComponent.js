@@ -14,8 +14,9 @@ const ContactComponent = ({ contactClose }) => {
     contactName: '',
     contactDid: '',
     readReceiptOff: false,
-
   })
+  const [contactAdded, setContactAdded] = useState(false)
+
   const [displayContact, setDisplayContact] = useState([])
   const handleContactClick = (contact) => {
     setSelectedContact(contact)
@@ -30,7 +31,7 @@ const ContactComponent = ({ contactClose }) => {
 
   useEffect(() => {
     fetchContactsList()
-  }, [])
+  }, [contactAdded])
   const copyNumber = (number) => {
     navigator.clipboard.writeText(number)
   }
@@ -43,12 +44,13 @@ const ContactComponent = ({ contactClose }) => {
     setShowModal(false)
   }
 
-  const handleSaveContact = () => {
-    addNewContact(newContact)
-    setNewContact({ contactName: '',
-    contactDid: '',
-    readReceiptOff: false})
-    setShowModal(false)
+  const handleSaveContact = async () => {
+    const newContactAdd = await addNewContact(newContact)
+    if (newContactAdd) {
+      setNewContact({ contactName: '', contactDid: '', readReceiptOff: false })
+      setShowModal(false)
+      setContactAdded(true)
+    }
   }
 
   const handleSendMessage = (e, contact) => {
@@ -94,13 +96,30 @@ const ContactComponent = ({ contactClose }) => {
               )}
             </h3>
           </div>
-          {loading? 
-             <div style={{display: 'flex', alignContent: 'center', justifyContent: 'center'}}>Loading ...</div> : null}
-            
-          {!loading && displayContact.length == 0 ? 
-                       <div style={{display: 'flex', alignContent: 'center',
-                        justifyContent: 'center'}}>No Contacts</div> : null}
-                
+          {loading ? (
+            <div
+              style={{
+                display: 'flex',
+                alignContent: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              Loading ...
+            </div>
+          ) : null}
+
+          {!loading && displayContact.length == 0 ? (
+            <div
+              style={{
+                display: 'flex',
+                alignContent: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              No Contacts
+            </div>
+          ) : null}
+
           <ul className="contactList">
             {displayContact.map((contact, index) => (
               <li key={index} className="contactItem">

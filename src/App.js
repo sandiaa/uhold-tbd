@@ -18,7 +18,7 @@ function App() {
       <Route exact path="/" component={UserInput} />
       <Route exact path="/landing" component={Landing} />
       <Route exact path="/mainPage" component={MainPage}/>
-      <Route exact path="/brandLogin/:protocolLink" component={BrandLoginPage} />
+      <Route exact path="/brandLogin" component={BrandLoginPage} />
       <Route exact path="/landing" component={Landing} />
       <Route exact path="/folderView/:id" component={FolderViewer} />
       <Route exact path="/brandFilesView/:id" component={BrandFilesView} />

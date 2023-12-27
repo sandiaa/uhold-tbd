@@ -73,7 +73,7 @@ const ShareActionModal = ({
             </p>
           </div>
         )}
-          {shareMessage === '' ?
+          {shareMessage === '' || isShareInPublic ?
         <div className="buttonGroup">
           <button className="createButton" onClick={shareMe}>
             Share

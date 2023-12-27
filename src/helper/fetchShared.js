@@ -1,7 +1,6 @@
 import { connectToWeb5 } from './web5ConnectHelper'
 
 export const fetchShared = async () => {
-  console.log('fetching shared')
   const web5Data = await connectToWeb5()
   if (web5Data) {
     const { web5Instance, didString } = web5Data

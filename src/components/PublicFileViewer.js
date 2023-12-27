@@ -3,8 +3,13 @@ import '../styles/publicFileViewer.css' // Ensure this CSS file exists and is co
 import { useLocation } from 'react-router-dom'
 import { fetchPublicShared } from '../helper/fetchPublicShared'
 import { displayFile } from '../helper/convertBlobToFile'
+import { useConnectToWeb5 } from '../helper/web5hook';
+import { useDispatch } from 'react-redux';
 
 const PublicFileViewer = () => {
+  const dispatch = useDispatch();
+  const [initializeWeb5, setInitializeWeb5] = useState(false);
+
   const [loading, setLoading] = useState(true)
   const [fileName, setFileName] = useState('')
   const [blobUrl, setBlobUrl] = useState(null)
@@ -13,8 +18,17 @@ const PublicFileViewer = () => {
   const query = useQuery()
   const recordId = query.get('id')
   const fromDid = query.get('sharedBy')
+  const connectToWeb5 = useConnectToWeb5();
+  useEffect(() => {
+    const initializeWeb5Connect = async () => {
+      const web5 = await connectToWeb5();
+      setInitializeWeb5(true); // Set to true after connection is established
+    };
+    initializeWeb5Connect();
+  }, [connectToWeb5]);
 
   useEffect(() => {
+    if (!initializeWeb5) return;
     const fetchAndDisplayFile = async () => {
       try {
         const fetchedRecord = await fetchPublicShared(recordId, fromDid)
@@ -40,7 +54,7 @@ const PublicFileViewer = () => {
     }
 
     fetchAndDisplayFile()
-  }, [recordId, fromDid])
+  }, [recordId, fromDid,initializeWeb5])
 
   return (
     <div>

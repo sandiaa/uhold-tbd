@@ -7,14 +7,25 @@ import { setContacts } from '../helper/redux/actions/contactActions';
 import { fetchContacts } from '../helper/fetchContacts';
 import { setUser } from '../helper/redux/actions/userActions';
 import { fetchUserDetails } from '../helper/web5ConnectHelper';
-
+import { useConnectToWeb5 } from '../helper/web5hook';
 const MainPage = () => {
   const dispatch = useDispatch();
   const [isLoadingContacts, setIsLoadingContacts] = useState(false);
   const [isLoadingUser, setIsLoadingUser] = useState(false);
+  const [initializeWeb5, setInitializeWeb5] = useState(false);
+
   const [error, setError] = useState(null);
+  const connectToWeb5 = useConnectToWeb5();
+  useEffect(() => {
+    const initializeWeb5Connect = async () => {
+      const web5 = await connectToWeb5();
+      setInitializeWeb5(true); // Set to true after connection is established
+    };
+    initializeWeb5Connect();
+  }, [connectToWeb5]);
 
   useEffect(() => {
+    if (!initializeWeb5) return;
     const fetchContactsList = async () => {
       setIsLoadingContacts(true);
       try {
@@ -44,7 +55,7 @@ const MainPage = () => {
  
     fetchContactsList();
     fetchUserData();
-  }, [dispatch]);
+  }, [dispatch, initializeWeb5]);
 
   if (isLoadingContacts || isLoadingUser) {
     return <div>Loading...</div>;

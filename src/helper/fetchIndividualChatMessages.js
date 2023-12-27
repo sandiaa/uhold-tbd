@@ -26,6 +26,7 @@ export const fetchIndividualChatMessages = async (receiverDid) => {
         },
       },
     })
+ 
     createContactPairSetting(receiverDid)
     const trasnformedlist = await transformChatToDisplay(userChats, senderChats)
     return trasnformedlist
@@ -98,5 +99,5 @@ const transformChatToDisplay = async (userChats, senderChats) => {
 //         receiverDid: recordData.receiverDid} })
 //     console.log(status)
 //     }
-//   })
+  // })
 // }
