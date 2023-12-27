@@ -5,6 +5,7 @@ import { fetchRootFiles } from '../helper/fetchFiles'
 import UtilityComponent from './UtilityComponent'
 import FileListContainer from './FileListContainer'
 import { fetchArecord } from '../helper/fetchArecord'
+import MessagesHome from './MessagesHome'
 const FolderViewer = () => {
   const { id } = useParams()
   const [recordId, setRecordId] = useState(id)
@@ -16,19 +17,19 @@ const FolderViewer = () => {
 
   useEffect(() => {
     const fetchRecordIds = async () => {
-        setLoading(true)
+      setLoading(true)
 
       const fetchRecord = await fetchArecord(id)
       const folderName = await fetchRecord[0].data.json()
       setRootRecord({
         recordId: fetchRecord[0]._recordId,
         contextId: fetchRecord[0]._contextId,
-        folderName: folderName.fileName
+        folderName: folderName.fileName,
       })
     }
 
     fetchRecordIds()
-  }, [id,isPageUpdateNeeded])
+  }, [id, isPageUpdateNeeded])
 
   useEffect(() => {
     const fetchAndSetRootFiles = async () => {
@@ -42,22 +43,30 @@ const FolderViewer = () => {
     fetchAndSetRootFiles()
   }, [rootRecord, isPageUpdateNeeded])
 
-
   return (
-    <div className="mainContainer">
-      {loading == false ? (
-        <div>
-          <UtilityComponent
-            onUpdate={() => setIsPageUpdateNeeded(true)}
-            rootId={rootRecord}
-            isSubFolder={true}
-          />
-          <h3 className="yourFileHeading">Folder: {rootRecord.folderName}</h3>
-          <div className="fileContainer">
-            <FileListContainer list={rootFiles} />
-          </div>
+    <div className="mainPageContainer">
+      <div className="landingComponent">
+        <div className="mainContainer">
+          {loading == false ? (
+            <div>
+              <UtilityComponent
+                onUpdate={() => setIsPageUpdateNeeded(true)}
+                rootId={rootRecord}
+                isSubFolder={true}
+              />
+              <h3 className="yourFileHeading">
+                Folder: {rootRecord.folderName}
+              </h3>
+              <div className="fileContainer">
+                <FileListContainer list={rootFiles} />
+              </div>
+            </div>
+          ) : null}
         </div>
-      ) : null}
+      </div>
+      <div className="chat">
+        <MessagesHome />
+      </div>
     </div>
   )
 }

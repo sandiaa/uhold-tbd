@@ -10,11 +10,18 @@ import FileActionComponent from './FileActionComponent'
 import brand from '../assets/brand.png'
 import { displayFile } from '../helper/convertBlobToFile'
 import { formatDate } from '../helper/formatDate'
-const FileItem = ({ file, onDelete,onRetrieve,onfileStarred }) => {
+import { connect } from 'react-redux'
+
+const FileItem = ({
+  file,
+  onDelete,
+  onRetrieve,
+  onfileStarred,
+  contactsList,
+}) => {
   const [fileToDisplay, setFileToDisplay] = useState(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const history = useHistory()
-
   const handleClick = () => {
     if (file.fileType == 'folder') {
       history.push(`/folderView/${file.recordId}`)
@@ -34,44 +41,60 @@ const FileItem = ({ file, onDelete,onRetrieve,onfileStarred }) => {
     onRetrieve(file.recordId)
   }
   const fileOnStarred = (isStarred) => {
-  onfileStarred(isStarred, file.recordId)
+    onfileStarred(isStarred, file.recordId)
   }
+  const resolveContact = () => {
+    const contact = contactsList.find(element => element.contactDid === file.sharedBy);
+    return contact ? contact.contactName : file.sharedBy;
+  };
 
   return (
     <div>
-        <div className="fileItemContainer">
-          <div className="fileActionContainer">
-            <FileActionComponent file={file} fileOnDelete={fileOnDelete} fileOnRetrieve={fileOnRetrieve} fileStarred={fileOnStarred}/>
-          </div>
-          <div className="fileItem" onClick={handleClick}>
-            <img
-              src={
-                file.fileType === 'folder'
-                  ? folder
-                  : file.fileType === 'brand'
-                  ? brand
-                  : fileImage
-              }
-              alt="folder"
-              className="fileImage"
-            />
-            <div className="fileDetails">
-              <h5 className="fileName">{file.fileName}</h5>
-              <p className="fileCreatedAt">{formatDate(file.createdAt)}</p>
-            </div>
-          </div>
-          <div>
-            {isModalOpen && fileToDisplay != null && (
-              <FileViewer
-                fileBlob={fileToDisplay}
-                onClose={() => setIsModalOpen(false)}
-                isOpen={isModalOpen}
-              />
+      <div className="fileItemContainer">
+        <div className="fileActionContainer">
+          <FileActionComponent
+            file={file}
+            fileOnDelete={fileOnDelete}
+            fileOnRetrieve={fileOnRetrieve}
+            fileStarred={fileOnStarred}
+          />
+        </div>
+        <div className="fileItem" onClick={handleClick}>
+          <img
+            src={
+              file.fileType === 'folder'
+                ? folder
+                : file.fileType === 'brand'
+                ? brand
+                : fileImage
+            }
+            alt="folder"
+            className="fileImage"
+          />
+          <div className="fileDetails">
+            <h5 className="fileName">{file.fileName}</h5>
+            <p className="fileCreatedAt">{formatDate(file.createdAt)}</p>
+            {file.sharedBy != '' && file.sharedBy != undefined && (
+              <p className="fileSharedBy">Shared By: {resolveContact()}</p>
             )}
           </div>
         </div>
+        <div>
+          {isModalOpen && fileToDisplay != null && (
+            <FileViewer
+              fileBlob={fileToDisplay}
+              onClose={() => setIsModalOpen(false)}
+              isOpen={isModalOpen}
+            />
+          )}
+        </div>
+      </div>
     </div>
   )
 }
-
-export default FileItem
+const mapStateToProps = (state) => {
+  return {
+    contactsList: state.contacts.contacts.contacts || [],
+  }
+}
+export default connect(mapStateToProps)(FileItem)

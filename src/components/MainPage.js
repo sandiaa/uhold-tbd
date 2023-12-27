@@ -41,7 +41,7 @@ const MainPage = () => {
       }
       setIsLoadingUser(false);
     };
-
+ 
     fetchContactsList();
     fetchUserData();
   }, [dispatch]);

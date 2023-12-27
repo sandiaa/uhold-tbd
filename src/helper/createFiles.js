@@ -23,8 +23,10 @@ export const createFiles = async (file, rootRecord,isSubFolder) => {
         fileStore : base64Image,
         shared: false,
         starred:false,
-        deleted:false
+        deleted:false,
+        sharedBy: ''
       }
+
       const {
         record: fileRecord,
         status: createStatus,

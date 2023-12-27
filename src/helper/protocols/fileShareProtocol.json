@@ -13,7 +13,8 @@
             { "who": "anyone", "can": "write" },
             { "who": "author", "of": "file", "can": "read" },
             { "who": "recipient", "of": "file", "can": "read" },
-            { "who": "author", "of": "file", "can": "update" }
+            { "who": "recipient", "of": "file", "can": "write" },
+            { "who": "author", "of": "file", "can": "write" }
           ]
       }
     }

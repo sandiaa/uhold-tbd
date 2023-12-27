@@ -7,6 +7,7 @@ import FolderViewer from './components/FolderViewer';
 import BrandLoginPage from './components/BrandLoginPage';
 import BrandFilesView from './components/BrandFilesView';
 import MainPage from './components/MainPage';
+import PublicFileViewer from './components/PublicFileViewer';
 import { Provider } from 'react-redux';
 import store from './helper/redux/store';
 function App() {
@@ -21,6 +22,7 @@ function App() {
       <Route exact path="/landing" component={Landing} />
       <Route exact path="/folderView/:id" component={FolderViewer} />
       <Route exact path="/brandFilesView/:id" component={BrandFilesView} />
+      <Route exact path="/publicFileSearch" component={PublicFileViewer} />
     </Switch>
   </Router>
   </Provider>

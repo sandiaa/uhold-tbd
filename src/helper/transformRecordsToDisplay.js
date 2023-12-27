@@ -16,6 +16,7 @@ export const transformList = async (list) => {
               starred: data.starred,
               deleted: data.deleted,
               shared: data.shared,
+              sharedBy: data.sharedBy
             };
           }
           return null; // Return null for items where data.deleted is true

@@ -2,7 +2,13 @@ import React, { useState, useEffect } from 'react'
 import '../styles/shareActionModal.css' // CSS file for styling
 import { connect } from 'react-redux'
 
-const ShareActionModal = ({ isOpen, onClose, onShare, contactlist }) => {
+const ShareActionModal = ({
+  isOpen,
+  onClose,
+  onShare,
+  shareMessage,
+  contactlist,
+}) => {
   const [isDropOpen, setIsDropOpen] = useState(false)
   const [isShareInPublic, setIsShareInPublic] = useState(false)
   const [selectedOption, setSelectedOption] = useState({ contactDid: '' })
@@ -51,6 +57,23 @@ const ShareActionModal = ({ isOpen, onClose, onShare, contactlist }) => {
         >
           Share in Public
         </button>
+        {isShareInPublic && (
+          <div>
+            <p>Click on the link to copy</p>
+            <p
+              onClick={() => navigator.clipboard.writeText(shareMessage)}
+              style={{
+                maxWidth: '250px',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                whiteSpace: 'nowrap',
+              }}
+            >
+              {shareMessage}
+            </p>
+          </div>
+        )}
+          {shareMessage === '' ?
         <div className="buttonGroup">
           <button className="createButton" onClick={shareMe}>
             Share
@@ -59,6 +82,12 @@ const ShareActionModal = ({ isOpen, onClose, onShare, contactlist }) => {
             Cancel
           </button>
         </div>
+        : 
+        <div className="buttonGroup">
+        <button className="cancelcreationButton" onClick={onClose}>
+          Close
+        </button>
+      </div>}
       </div>
     </div>
   )

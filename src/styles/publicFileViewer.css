@@ -1,0 +1,37 @@
+/* Styles for the PublicFileViewer component */
+.public-file-viewer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full viewport height */
+  padding: 5px;
+  background-color: #f2f2f2; /* Light grey background */
+}
+
+.file-viewer-container {
+  width: 100%;
+  height: 100vh;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+  overflow: hidden; /* Hide overflow */
+}
+
+.shared-file-name {
+  margin: 0;
+  padding: 16px;
+  background-color: #4a90e2; /* Example blue background */
+  color: white;
+  text-align: center;
+}
+
+.file-content {
+  width: 100%;
+  height: calc(100% - 32px); /* Adjust height considering the title bar */
+  border: none; /* Remove border */
+}
+
+/* Loading text style */
+.public-file-viewer p {
+  font-size: 1.5em;
+  color: #333;
+}

@@ -17,10 +17,18 @@ const FileActionComponent = ({
   const [isStarred, setIsStarred] = useState('')
   const [loading, setIsLoading] = useState(false)
   const [shareFlag, setShareFlag] = useState(false)
+  const [fileShareMessage, setFileShareMessage] = useState("")
 
-  const shareFile = (isPublicShare, shareToDid) => {
-     createShared(file.recordId, isPublicShare, shareToDid)
-     setShareFlag(false)
+  const shareFile = async (isPublicShare, shareToDid) => {
+     const creationResult = await createShared(file.recordId, isPublicShare, shareToDid)
+     if(isPublicShare){
+      const linkToShare = `/publicFileSearch?id=${encodeURIComponent(creationResult.recordId)}&sharedBy=${encodeURIComponent(creationResult.sharedBy)}`
+      setFileShareMessage(linkToShare) 
+      setShareFlag(true)
+    }else{
+      setShareFlag(false)
+
+    }
   }
 
  
@@ -69,6 +77,7 @@ const FileActionComponent = ({
         isOpen={shareFlag}
         onClose={() => setShareFlag(false)}
         onShare={shareFile}
+        shareMessage={fileShareMessage}       
       />
       <div className="fileItemActions">
         {!loading && !file.deleted ? (

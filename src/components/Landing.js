@@ -8,15 +8,16 @@ import { fetchBrandFiles } from '../helper/fetchBrandFiles'
 import { createRootFiles } from '../helper/createRootFiles'
 import { fetchShared } from '../helper/fetchShared'
 const Landing = () => {
-  fetchShared()
 
   const [rootFiles, setRootFiles] = useState([])
   const [brandFiles, setBrandFiles] = useState([])
+  const [sharedFiles, setSharedFiles] = useState([])
+
   const [rootId, setRootId] = useState({})
   const [isPageUpdateNeeded, setIsPageUpdateNeeded] = useState(false)
   const [loading, setLoading] = useState(false)
   const [showTrash, setShowTrash] = useState(false)
-  const files = []
+
 
   useEffect(() => {
     const setRootData = async () => {
@@ -36,6 +37,8 @@ const Landing = () => {
         setRootFiles(fetchRootFilesList)
         const brandRecords = await fetchBrandFiles()
         setBrandFiles(brandRecords)
+        const sharedRecords = await fetchShared()
+        setSharedFiles(sharedRecords)
         setLoading(false)
         setIsPageUpdateNeeded(false)
       }
@@ -65,7 +68,7 @@ const Landing = () => {
           </div>
           <h3 className="fileHeading">Shared files</h3>
           <div className="fileContainer">
-            <FileListContainer list={files} />
+          <FileListContainer list={sharedFiles} onFileDelete={onFileDelete}  />
           </div>
           <h3 className="fileHeading">Associated Brand files</h3>
           <div className="fileContainer">

@@ -22,6 +22,7 @@ const MessagesHome = ({ userDetails, contactsList }) => {
         const list = await fetchChats();
         const transformedList = await transform(list, userDetails, contactsList);
         setChats(transformedList);
+        setIsLoading(false);
       } catch (error) {
         console.error('Error fetching and updating chat list:', error);
         // Handle the error appropriately
@@ -75,8 +76,8 @@ const MessagesHome = ({ userDetails, contactsList }) => {
             <h3>Chats</h3>
             <button onClick={contactsOpen}>Contacts</button>
           </div>
-          {/* {loading? 
-             <div style={{display: 'flex', alignContent: 'center', justifyContent: 'center'}}>Loading ...</div> : null} */}
+          {loading? 
+             <div style={{display: 'flex', alignContent: 'center', justifyContent: 'center'}}>Loading ...</div> : null}
              {!loading && chats.length ==0 ? 
              <div style={{display: 'flex', alignContent: 'center', justifyContent: 'center'}}>No Chats</div> : null}
           {!loading && (

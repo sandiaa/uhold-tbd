@@ -37,6 +37,15 @@
           "who": "author",
           "of": "subFolder",
           "can": "write"
+        }, {
+          "who": "recipient",
+          "of": "rootFolder",
+          "can": "read"
+        },
+        {
+          "who": "recipient",
+          "of": "rootFolder",
+          "can": "write"
         }
       ],
       "folderFiles": {
@@ -49,16 +58,6 @@
           {
             "who": "author",
             "of": "rootFolder",
-            "can": "write"
-          },
-          {
-            "who": "author",
-            "of": "subFolder",
-            "can": "read"
-          },
-          {
-            "who": "author",
-            "of": "subFolder",
             "can": "write"
           }
         ]
@@ -76,17 +75,16 @@
             "can": "write"
           },
           {
-            "who": "author",
+            "who": "recipient",
             "of": "subFolder",
             "can": "read"
           },
           {
-            "who": "author",
+            "who": "recipient",
             "of": "subFolder",
             "can": "write"
           }
         ],
-
         "subFolder": {
           "$actions": [
             {
@@ -108,9 +106,19 @@
               "who": "author",
               "of": "subFolder",
               "can": "write"
+            }, 
+            {
+              "who": "recipient",
+              "of": "subFolder",
+              "can": "read"
+            },
+            {
+              "who": "recipient",
+              "of": "subFolder",
+              "can": "write"
             }
           ],
-          "folderFiles": {
+          "subFolder": {
             "$actions": [
               {
                 "who": "author",
@@ -131,9 +139,45 @@
                 "who": "author",
                 "of": "subFolder",
                 "can": "write"
+              }, {
+                "who": "recipient",
+                "of": "subFolder",
+                "can": "read"
+              },
+              {
+                "who": "recipient",
+                "of": "subFolder",
+                "can": "write"
               }
-            ]
+            ], "folderFiles": {
+              "$actions": [
+                {
+                  "who": "author",
+                  "of": "rootFolder",
+                  "can": "read"
+                },
+                {
+                  "who": "author",
+                  "of": "rootFolder",
+                  "can": "write"
+                }
+              ]
+            }
           }
+        },
+        "folderFiles": {
+          "$actions": [
+            {
+              "who": "author",
+              "of": "rootFolder",
+              "can": "read"
+            },
+            {
+              "who": "author",
+              "of": "rootFolder",
+              "can": "write"
+            }
+          ]
         }
       }
     }

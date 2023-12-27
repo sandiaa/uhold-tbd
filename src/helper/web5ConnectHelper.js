@@ -2,7 +2,14 @@ import { Web5 } from '@web5/api'
 import { Web5UserAgent } from '@web5/user-agent'
 import { DidKeyMethod } from '@web5/dids'
 import { stringify, parse } from 'flatted';
-export const connectToWeb5 = async () => {
+import { useDispatch , useSelector} from 'react-redux';
+import { setWeb5 } from './redux/actions/web5ConnectAction';
+export const connectToWeb5 = () => {
+const a = connectDwnWeb5()
+return a
+};
+export const connectDwnWeb5 = async () => {
+  
   try {
     const { web5, did } = await Web5.connect({
       sync: '5s',
@@ -16,7 +23,6 @@ export const connectToWeb5 = async () => {
     return null
   }
 }
-
 export const fetchUserDetails = async () => {
   try {
     const { web5, did } = await Web5.connect({

@@ -13,7 +13,8 @@ export const createFolder = async (folderName, rootRecord, isSubFolder) => {
         fileStore: "",
         shared: false,
         starred:false,
-        deleted:false
+        deleted:false,
+        sharedBy: ''
       }
       const {
         record: folderRecord,
@@ -24,12 +25,11 @@ export const createFolder = async (folderName, rootRecord, isSubFolder) => {
           contextId: rootRecord.contextId,
           parentId: rootRecord.recordId,
           protocol: rootProtocol.protocol,
-          protocolPath:  isSubFolder == true ? 'rootFolder/subFolder/subFolder/subFolder':'rootFolder/subFolder',
+          protocolPath:  isSubFolder == true ? 'rootFolder/subFolder/subFolder':'rootFolder/subFolder',
           schema: rootProtocol.types.subFolder.schema,
           dataFormat: rootProtocol.types.subFolder.dataFormats[0],
         },
       })
-      console.log( folderRecord)
       if (createStatus.code == 202) {
         return true
       } else {
