@@ -1,7 +1,6 @@
 const webpack = require('webpack');
 
 module.exports = function override(config, env) {
-  if (!env || !env.startsWith('production')) {
     config.resolve.fallback = {
       ...config.resolve.fallback,
       stream: require.resolve('stream-browserify'),
@@ -25,6 +24,6 @@ module.exports = function override(config, env) {
             fullySpecified: false
         }
     })
-  }
+  
   return config;
 };
