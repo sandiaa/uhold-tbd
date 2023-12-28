@@ -87,17 +87,19 @@
     padding: 8px;
     border-radius: 5px;
     border: 1px solid #ccc;
+    margin-Top: 10px;
   }
   
   /* Send button */
   .sendButton {
-    padding: 8px 15px;
     border: none;
     border-radius: 5px;
     background-color: #4caf50;
     color: white;
     cursor: pointer;
     margin-left: 10px;
+    margin-Top: 1px;
+
   }
   .headerRow {
     display: flex;

@@ -1,19 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import '../styles/folderViewer.css'
 import { useParams } from 'react-router-dom'
-import { fetchRootFiles } from '../helper/fetchFiles'
 import UtilityComponent from './UtilityComponent'
 import FileListContainer from './FileListContainer'
 import { fetchArecord } from '../helper/fetchArecord'
 import MessagesHome from './MessagesHome'
+import { fetchFolderRecord } from '../helper/fetchFolderRecords'
 const FolderViewer = () => {
   const { id } = useParams()
-  const [recordId, setRecordId] = useState(id)
   const [rootRecord, setRootRecord] = useState({})
   const [rootFiles, setRootFiles] = useState([])
   const [isPageUpdateNeeded, setIsPageUpdateNeeded] = useState(false)
   const [loading, setLoading] = useState(false)
-  const files = []
 
   useEffect(() => {
     const fetchRecordIds = async () => {
@@ -34,20 +32,20 @@ const FolderViewer = () => {
   useEffect(() => {
     const fetchAndSetRootFiles = async () => {
       if (id != null) {
-        const fetchRootFilesList = await fetchRootFiles(id)
+        const fetchRootFilesList = await fetchFolderRecord(id)
         setRootFiles(fetchRootFilesList)
         setLoading(false)
         setIsPageUpdateNeeded(false)
       }
     }
     fetchAndSetRootFiles()
-  }, [rootRecord, isPageUpdateNeeded])
+  }, [id, rootRecord, isPageUpdateNeeded])
 
   return (
     <div className="mainPageContainer">
       <div className="landingComponent">
         <div className="mainContainer">
-          {loading == false ? (
+          {loading === false ? (
             <div>
               <UtilityComponent
                 onUpdate={() => setIsPageUpdateNeeded(true)}

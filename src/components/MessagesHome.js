@@ -73,7 +73,7 @@ const MessagesHome = ({ userDetails, contactsList }) => {
         <div className="chatListContainer">
           <div className="chatListHeader">
             <h3>Chats</h3>
-            <button onClick={contactsOpen}>Group</button>
+            <button style={{marginRight: '10px'}} onClick={contactsOpen}>Group</button>
 
             <button onClick={contactsOpen}>Contacts</button>
           </div>
@@ -88,7 +88,7 @@ const MessagesHome = ({ userDetails, contactsList }) => {
               Loading ...
             </div>
           ) : null}
-          {!loading && chats.length == 0 ? (
+          {!loading && chats.length === 0 ? (
             <div
               style={{
                 display: 'flex',
@@ -115,7 +115,7 @@ const MessagesHome = ({ userDetails, contactsList }) => {
                     />
                     <div className="messageInfo">
                       <div className="messageName">
-                        {message.contactName != ''
+                        {message.contactName !== ''
                           ? message.contactName
                           : message.did}
                       </div>
@@ -182,7 +182,7 @@ const transform = async (records, userDetails, contactList) => {
 
     var lastOpen = ''
     var isMessageAfterLastOpen = true
-    if (chatSetting.length != 0) {
+    if (chatSetting.length !== 0) {
       const contactSettingIndex = chatSetting.settings.findIndex(
         (item) => item.did === didToCompare,
       )
