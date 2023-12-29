@@ -2,7 +2,6 @@ import { connectToWeb5 } from './web5ConnectHelper'
 import rootProtocol from './protocols/rootProtocol.json'
 import { fetchArecord } from './fetchArecord'
 export const createFolder = async (folderName, rootRecord, isSubFolder) => {
-  console.log(folderName, rootRecord, isSubFolder)
   const web5Data = await connectToWeb5()
   if (web5Data) {
     const { web5Instance, didString } = web5Data

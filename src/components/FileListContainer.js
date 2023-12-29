@@ -5,13 +5,13 @@ import {
   transformList,
   fetchTrashFiles,
 } from '../helper/transformRecordsToDisplay'
-import { binFileDelete } from '../helper/binFileDeleteScheduler'
 const FileListContainer = ({ list, onFileDelete, showTrashValue }) => {
   const [filesList, setFilesList] = useState([])
   const [displayList, setDisplayList] = useState([])
   const [isSortByDate, setIsSortByDate] = useState(false)
   const [isSortByStarred, setIsSortByStarred] = useState(false)
   const [loading, setLoading] = useState(false)
+
   useEffect(() => {
     async function transformRecords() {
       setLoading(true)
@@ -26,16 +26,6 @@ const FileListContainer = ({ list, onFileDelete, showTrashValue }) => {
 
     transformRecords()
   }, [list, showTrashValue])
-  useEffect(() => {
-    // Check if filesList is empty
-    if (filesList.length === 0) return;
-  
-    if (showTrashValue) {
-      binFileDelete(filesList);
-    }
-  }, [showTrashValue, filesList]); // Include filesList in the dependency array
-  
-
 
   const fileOnDelete = () => {
     onFileDelete()
@@ -46,6 +36,7 @@ const FileListContainer = ({ list, onFileDelete, showTrashValue }) => {
     setFilesList(updatedList)
     setDisplayList(updatedList)
   }
+  
   const fileStarred = (isStarred, recordId) => {
     const index = filesList.findIndex((item) => item.recordId === recordId)
 

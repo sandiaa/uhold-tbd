@@ -14,20 +14,29 @@ const FileActionComponent = ({
   fileOnRetrieve,
   fileStarred,
 }) => {
+
+  const getRootUrl = () => {
+    const { protocol, hostname, port } = window.location;
+    const rootUrl = `${protocol}//${hostname}${port ? `:${port}` : ''}`;
+    return rootUrl;
+  };
+
   const [isStarred, setIsStarred] = useState('')
   const [loading, setIsLoading] = useState(false)
   const [shareFlag, setShareFlag] = useState(false)
   const [fileShareMessage, setFileShareMessage] = useState("")
 
   const shareFile = async (isPublicShare, shareToDid) => {
+
      const creationResult = await createShared(file.recordId, isPublicShare, shareToDid)
      if(isPublicShare){
-      const linkToShare = `/publicFileSearch?id=${encodeURIComponent(creationResult.recordId)}&sharedBy=${encodeURIComponent(creationResult.sharedBy)}`
+      const rootUrl = getRootUrl();
+      const linkGenerated = `/publicFileSearch?id=${encodeURIComponent(creationResult.recordId)}&sharedBy=${encodeURIComponent(creationResult.sharedBy)}`
+      const linkToShare = rootUrl+linkGenerated
       setFileShareMessage(linkToShare) 
       setShareFlag(true)
     }else{
       setShareFlag(false)
-
     }
   }
 
@@ -89,7 +98,7 @@ const FileActionComponent = ({
                 className="fileImage"
               />
             </button>
-            <button className="fileActionButton" onClick={() => setShareFlag(true)}>
+            <button className="fileActionButton" onClick={() => {file.fileType === 'folder'? alert('Feature under development!') :setShareFlag(true)}}>
               <img src={share} alt="Share" className="fileImage" />
             </button>
             <button className="fileActionButton" onClick={deleteMe}>

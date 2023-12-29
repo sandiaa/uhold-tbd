@@ -73,7 +73,8 @@ const MessagesHome = ({ userDetails, contactsList }) => {
         <div className="chatListContainer">
           <div className="chatListHeader">
             <h3>Chats</h3>
-            <button style={{marginRight: '10px'}} onClick={contactsOpen}>Group</button>
+            <button style={{marginRight: '10px'}} onClick={() => {
+    alert('Feature under development!')}}>Group</button>
 
             <button onClick={contactsOpen}>Contacts</button>
           </div>
