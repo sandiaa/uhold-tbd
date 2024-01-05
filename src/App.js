@@ -7,6 +7,7 @@ import FolderViewer from './components/FolderViewer';
 import BrandLoginPage from './components/BrandLoginPage';
 import BrandFilesView from './components/BrandFilesView';
 import MainPage from './components/MainPage';
+import UserLogin from './components/UserLogin';
 import PublicFileViewer from './components/PublicFileViewer';
 import { Provider } from 'react-redux';
 import store from './helper/redux/store';
@@ -15,7 +16,7 @@ function App() {
     <Provider store={store}>
     <Router>
     <Switch>
-      <Route exact path="/" component={UserInput} />
+      <Route exact path="/" component={UserLogin} />
       <Route exact path="/landing" component={Landing} />
       <Route exact path="/mainPage" component={MainPage}/>
       <Route exact path="/brandLogin" component={BrandLoginPage} />

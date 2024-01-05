@@ -36,7 +36,6 @@ export const createRootFolder = async () => {
       const locationRecord = await records[0].data.json()
 
       if (locationRecord.location == 'root') {
-        console.log('Root already exists')
         return {recordId:records[0]._recordId,contextId : records[0]._contextId
       }
     }

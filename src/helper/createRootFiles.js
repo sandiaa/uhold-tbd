@@ -11,7 +11,6 @@ const createContactFiles = async () => {
     const web5Data = await connectToWeb5()
     if (web5Data) {
       const { web5Instance, didString } = web5Data
-      console.log(didString)
       const { records } = await web5Instance.dwn.records.query({
         message: {
           filter: {
@@ -54,7 +53,6 @@ const configureChatProtocol = async () => {
     }
 
     if(protocols.length > 0) {
-        console.log('chat protocol already exists');
         return;
     }
 
@@ -92,7 +90,6 @@ const configureFileShareProtocol = async () => {
   }
 
   if(protocols.length > 0) {
-      console.log('fileShare protocol already exists');
       return;
   }
 

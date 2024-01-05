@@ -98,3 +98,26 @@ export const createUserInThisAgent = async (name, password, file) => {
 
   //       console.log("Retrieved JSON Object:", jsonObject);
 }
+
+export const createUserInThisMachine = async (password) => {
+  console.log(password)
+  const userAgent = await Web5UserAgent.create()
+  await userAgent.start({ passphrase: password })
+
+  // if (file == undefined) {
+  // const userDid = await DidKeyMethod.create()
+  // const identity = await userAgent.identityManager.import({
+  //   did: userDid,
+  //   identity: { did: userDid.did, name: name },
+  //   kms: 'local',
+  // })
+
+  // await userAgent.identityManager.import({
+  //   identity,
+  //   context: userAgent.agentDid,
+  // })
+
+  const { web5, did: myDid } = await Web5.connect({
+    sync: '5s'
+  })
+}

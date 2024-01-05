@@ -16,7 +16,6 @@ const verifyUser = async (userPassword) => {
       const store = tx.objectStore('userData');
       await store.put(userPassword, 'user');
       await tx.done;
-      console.log('Data stored successfully');
     } catch (error) {
       console.error('Error storing data:', error);
     }
