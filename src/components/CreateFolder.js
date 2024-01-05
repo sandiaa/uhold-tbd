@@ -29,14 +29,14 @@ const CreateFolder = ({ isOpen, onClose, onCreate }) => {
           placeholder="Folder Name"
           className="folderName"
         />
-          <label  className="checkBoxStore">
+          {/* <label  className="checkBoxStore">
         <input
           type="checkbox"
           checked={isChecked}
           onChange={handleCheckboxChange}
         />
        Check to store this file in your device
-      </label>
+      </label> */}
         <div className="buttonGroup">
           <button onClick={handleCreate} className="createButton">Create</button>
           <button onClick={onClose} className="cancelcreationButton">Cancel</button>
