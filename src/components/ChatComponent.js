@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import '../styles/chatComponent.css' // CSS file for styling
-import folder from '../assets/folder.png'
 import { fetchIndividualChatMessages } from '../helper/fetchIndividualChatMessages'
 import { sendMessages } from '../helper/sendMessage'
 const ChatComponent = ({ senderDid, showMessageWindow, senderName }) => {
@@ -47,11 +46,11 @@ const ChatComponent = ({ senderDid, showMessageWindow, senderName }) => {
                 {message.senderDid !== senderDid ? (
                   <div className="messageContent sent">
                     <div className="messageText">{message.messageData.message}</div>
-                    <img src={folder} alt="Sender" className="senderPic" />
+                    <img alt="Sender" className="senderPic" />
                   </div>
                 ) : (
                   <div className="messageContent received">
-                    <img src={folder} alt="Receiver" className="receiverPic" />
+                    <img alt="Receiver" className="receiverPic" />
                     <div className="messageText">{message.messageData.message}</div>
                   </div>
                 )}
