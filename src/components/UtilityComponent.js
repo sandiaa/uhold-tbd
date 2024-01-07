@@ -75,7 +75,7 @@ const UtilityComponent = ({
         />
       </div>
       {showTrashValue ? null : (
-        <div className="trashButton" onClick={showTrash}>
+        !isSubFolder && <div className="trashButton" onClick={showTrash}>
           <img src={trash} alt="Trash Icon" className="icon" />
         </div>
       )}
