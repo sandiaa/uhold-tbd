@@ -22,7 +22,6 @@ export const fetchBrandFiles = async () => {
 }
 
 export const fetchIndividualBrand = async (data) => {
-  console.log(data)
   const web5Data = await connectToWeb5()
 
   if (web5Data) {

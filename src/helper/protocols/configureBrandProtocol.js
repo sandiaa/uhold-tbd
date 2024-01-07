@@ -16,21 +16,22 @@ export const configureBrandProtocol = async (brandProtocolId, brandDid) => {
         },
       },
     })
-
+ 
     const protocolToConfigure = await responseRec[0].data.json()
     const {
       status: configureStatus,
       protocol,
     } = await web5Instance.dwn.protocols.configure({
       message: {
-        definition: protocolToConfigure.protocol,
+        definition: protocolToConfigure.protocolToBeConfiguredInUser.protocol,
       },
     })
     if (configureStatus.code == 202) {
       const fileData = {
-        fileName: 'brand2',
+        fileName: protocolToConfigure.protocolToBeConfiguredInUser.brandName,
         fileStore: {
-          protocol: protocolToConfigure.protocol.protocol,
+          protocol: protocolToConfigure.protocolToBeConfiguredInUser.protocol.protocol,
+          schema: protocolToConfigure.protocolToBeConfiguredInUser.protocol.types.brandFiles.schema
         },
         fileType: 'brand',
       }

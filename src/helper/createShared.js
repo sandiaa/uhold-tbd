@@ -17,7 +17,6 @@ export const createShared = async (fileRecordId, isPublic, recipientDid) => {
       dataToShare.sharedBy = didString
       const dataModified = dataToShare
       if (!isPublic) {
-        console.log("iam not public")
         const { record } = await web5Instance.dwn.records.write({
           data: dataModified,
           message: {
