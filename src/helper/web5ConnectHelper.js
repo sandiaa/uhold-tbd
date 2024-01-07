@@ -19,7 +19,7 @@ export const connectToWeb5 = async () => {
 export const connectDwnWeb5 = async () => {
   try {
     const { web5, did } = await Web5.connect({
-      sync: '5s'
+      sync: '5s' ,
     })
     return { web5Instance: web5, didString: did }
   } catch (error) {
@@ -30,7 +30,7 @@ export const connectDwnWeb5 = async () => {
 export const fetchUserDetails = async () => {
   try {
     const { web5, did } = await Web5.connect({
-      sync: '5s'
+      sync: '5s' ,
     })
     return { did: did }
   } catch (error) {
@@ -61,7 +61,6 @@ export const fetchVerifyUser = async (userPassword) => {
 }
 
 export const createUserInThisAgent = async (name, password, file) => {
-  console.log(password)
   // const userAgent = await Web5UserAgent.create()
   // await userAgent.start({ passphrase: password })
 
@@ -79,7 +78,7 @@ export const createUserInThisAgent = async (name, password, file) => {
   // })
 
   const { web5, did: myDid } = await Web5.connect({
-    sync: '5s'
+    sync: '5s' ,
   })
   //     const jsonString = JSON.stringify(userDid)
   //     const myObject = userAgent
@@ -100,7 +99,6 @@ export const createUserInThisAgent = async (name, password, file) => {
 }
 
 export const createUserInThisMachine = async (password) => {
-  console.log(password)
   const userAgent = await Web5UserAgent.create()
   await userAgent.start({ passphrase: password })
 
@@ -118,6 +116,6 @@ export const createUserInThisMachine = async (password) => {
   // })
 
   const { web5, did: myDid } = await Web5.connect({
-    sync: '5s'
+    sync: '5s',
   })
 }

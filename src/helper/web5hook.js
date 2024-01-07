@@ -31,7 +31,7 @@ export const useConnectToWeb5 =  () => {
   
     try {
       const { web5, did } = await Web5.connect({
-        sync: '5s'
+        sync: '5s' ,
       })
       return { web5Instance: web5, didString: did }
     } catch (error) {

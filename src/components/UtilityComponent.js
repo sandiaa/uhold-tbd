@@ -5,7 +5,7 @@ import CreateFolder from './CreateFolder'
 import { createFolder } from '../helper/createFolder'
 import { createFiles } from '../helper/createFiles'
 import trash from '../assets/trash.png'
-
+import { fetchMyDid } from '../helper/fetchMyDid'
 const UtilityComponent = ({
   onUpdate,
   rootId,
@@ -49,37 +49,50 @@ const UtilityComponent = ({
   const showTrash = async () => {
     showTrashPage()
   }
+
+  const myDid = async () => {
+    const did = await fetchMyDid()
+    return did
+  }
   return (
     <div>
-    <div className="buttonGroup">
-      <div>
-        {showTrashValue ? (
-          <div className="backButton" onClick={showHome}>
-            <p className="backButtonText">Back</p>
-          </div>
-        ) : null}
-        <SmallButton text="Upload Files" onClick={handleButtonClick} />
-        <input
-          type="file"
-          ref={fileInputRef}
-          style={{ display: 'none' }}
-          onChange={handleFileInputChange}
-        />
-      </div>
-      <div>
-        <SmallButton text="Create Folder" onClick={createFolderOnClick} />
-        <CreateFolder
-          isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-          onCreate={handleCreateFolder}
-        />
-      </div>
-      {showTrashValue ? null : (
-        !isSubFolder && <div className="trashButton" onClick={showTrash}>
-          <img src={trash} alt="Trash Icon" className="icon" />
+      <div className="buttonGroup">
+        <div>
+          {showTrashValue ? (
+            <div className="backButton" onClick={showHome}>
+              <p className="backButtonText">Back</p>
+            </div>
+          ) : null}
+          <button
+            style={{ marginRight: '10px' }}
+            onClick={async () => navigator.clipboard.writeText(await myDid())}
+          >
+            Copy my did
+          </button>
+          <SmallButton text="Upload Files" onClick={handleButtonClick} />
+          <input
+            type="file"
+            ref={fileInputRef}
+            style={{ display: 'none' }}
+            onChange={handleFileInputChange}
+          />
         </div>
-      )}
-    </div>
+        <div>
+          <SmallButton text="Create Folder" onClick={createFolderOnClick} />
+          <CreateFolder
+            isOpen={isModalOpen}
+            onClose={() => setIsModalOpen(false)}
+            onCreate={handleCreateFolder}
+          />
+        </div>
+        {showTrashValue
+          ? null
+          : !isSubFolder && (
+              <div className="trashButton" onClick={showTrash}>
+                <img src={trash} alt="Trash Icon" className="icon" />
+              </div>
+            )}
+      </div>
     </div>
   )
 }
