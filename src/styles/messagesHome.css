@@ -24,8 +24,8 @@
 
 /* Style for contact image */
 .messageImage {
-  width: 50px; /* Adjust image size */
-  height: 50px;
+  width: 35px; /* Adjust image size */
+  height: 35px;
   border-radius: 50%; /* Make it circular */
   margin-right: 15px; /* Adjust margin as needed */
   padding: 5px;
