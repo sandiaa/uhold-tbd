@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import '../styles/messagesHome.css'
-import folder from '../assets/folder.png'
+import userImage from '../assets/owner.png'
 import { fetchChats } from '../helper/fetchChats'
 import ChatComponent from './ChatComponent'
 import ContactComponent from './ContactComponent'
@@ -110,7 +110,7 @@ const MessagesHome = ({ userDetails, contactsList }) => {
                     onClick={() => messageOpen(message)}
                   >
                     <img
-                      src={folder}
+                      src={userImage}
                       alt={message?.did}
                       className="messageImage"
                     />
