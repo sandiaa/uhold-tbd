@@ -32,6 +32,9 @@ export const useConnectToWeb5 =  () => {
     try {
       const { web5, did } = await Web5.connect({
         sync: '5s' ,
+      techPreview: {
+        dwnEndpoints: ["https://tbd-server.onrender.com"]
+      }
       })
       return { web5Instance: web5, didString: did }
     } catch (error) {

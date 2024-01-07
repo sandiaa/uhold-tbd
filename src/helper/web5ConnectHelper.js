@@ -20,6 +20,9 @@ export const connectDwnWeb5 = async () => {
   try {
     const { web5, did } = await Web5.connect({
       sync: '5s' ,
+      techPreview: {
+        dwnEndpoints: ["https://tbd-server.onrender.com"]
+      }
     })
     return { web5Instance: web5, didString: did }
   } catch (error) {
@@ -31,6 +34,9 @@ export const fetchUserDetails = async () => {
   try {
     const { web5, did } = await Web5.connect({
       sync: '5s' ,
+      techPreview: {
+        dwnEndpoints: ["https://tbd-server.onrender.com"]
+      }
     })
     return { did: did }
   } catch (error) {
@@ -79,6 +85,9 @@ export const createUserInThisAgent = async (name, password, file) => {
 
   const { web5, did: myDid } = await Web5.connect({
     sync: '5s' ,
+    techPreview: {
+      dwnEndpoints: ["https://tbd-server.onrender.com"]
+    }
   })
   //     const jsonString = JSON.stringify(userDid)
   //     const myObject = userAgent
@@ -116,6 +125,9 @@ export const createUserInThisMachine = async (password) => {
   // })
 
   const { web5, did: myDid } = await Web5.connect({
-    sync: '5s',
+    sync: '5s' ,
+      techPreview: {
+        dwnEndpoints: ["https://tbd-server.onrender.com"]
+      }
   })
 }
