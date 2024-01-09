@@ -1,3 +1,17 @@
+This is submitted as part of TBD Hackathon.
+Points to note
+=> Since this project uses render.com to host DWN,
+
+Render spins down a Free web service that goes 15 minutes without receiving inbound traffic. Render spins the service back up whenever it next receives a request to process.
+
+Spinning up a service takes a few seconds, which causes a noticeable delay for incoming requests until the service is back up and running. For example, a browser page load will hang momentarily or you may expect a delay for a few seconds.
+
+=> Try refreshing the page if any feature doesn't work as expected, might be an UI render/load issue, should get resolved when refreshed if any :)
+
+=> Not optimised for mobile viewing, sorry :(
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
